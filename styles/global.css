@@ -1,113 +1,127 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 100;
+  background-color: #1b1e2b;
+  color: white;
+}
+
 .state {
-    fill: #dadada;
-    stroke: #c8c8c8;
-    stroke-width: 1;
+  fill: #dadada;
+  stroke: #c8c8c8;
+  stroke-width: 1;
 }
 
 .state:hover:not(.state-excluded):not(.state-focused) {
-    cursor: pointer;
-    fill: #d0d0d0;
-    stroke: #bababa;
+  cursor: pointer;
+  fill: #d0d0d0;
+  stroke: #bababa;
 }
 
 .state:active:not(.state-excluded),
 .state-focused {
-    stroke-width: 2;
-    stroke: #6a6a6a !important;
+  stroke-width: 2;
+  stroke: #6a6a6a !important;
 }
 
 .state-excluded {
-    fill: #ebebeb;
-    stroke: #ebebeb;
+  fill: #ebebeb;
+  stroke: #ebebeb;
 }
 
 .tooltip {
-    background-color: #efefef;
-    outline-style: solid;
-    outline-width: 1px;
-    outline-color: #8c8c8c;
-    padding: 4px;
-    user-select: none;
+  background-color: #efefef;
+  outline-style: solid;
+  outline-width: 1px;
+  outline-color: #8c8c8c;
+  padding: 4px;
+  user-select: none;
 }
 
 .tooltip-title {
-    margin-top: 0px;
+  margin-top: 0px;
 }
 
 .tooltip-hint {
-    font-size: 80%;
-    margin-bottom: 0px;
+  font-size: 80%;
+  margin-bottom: 0px;
 }
 
 .table {
-    padding: 0px;
-    margin: 0px;
-    margin-top: 6px;
-    margin-bottom: 8px;
-    border-collapse: collapse;
+  padding: 0px;
+  margin: 0px;
+  margin-top: 6px;
+  margin-bottom: 8px;
+  border-collapse: collapse;
 }
 
 .table-heading {
-    text-align: left;
+  text-align: left;
 }
 
 .table-text-input {
-    border: none;
-    border-bottom: 1px solid #a9a9a9;
-    max-width: 60px;
-    max-height: 12px;
+  border: none;
+  border-bottom: 1px solid #a9a9a9;
+  max-width: 60px;
+  max-height: 12px;
 }
 
 .min-width-8 {
-    min-width: 8vw;
+  min-width: 8vw;
 }
 
 .min-width-12 {
-    min-width: 12vw;
+  min-width: 12vw;
 }
 
 .padding-left-1 {
-    padding-left: 1vw;
+  padding-left: 1vw;
 }
 
 .incumbent {
-    border-radius: 50%;
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    color: #efefef;
-    text-align: center;
-    vertical-align: text-bottom;
-    font-size: 12px;
-    margin-left: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  color: #efefef;
+  text-align: center;
+  vertical-align: text-bottom;
+  font-size: 12px;
+  margin-left: 6px;
 }
 
 .map-parent {
-    display: inline-block;
-    flex-grow: 0;
+  display: inline-block;
+  flex-grow: 0;
 }
 
 .race-overview {
-    display: inline-block;
-    flex-grow: 1
+  display: inline-block;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.race-overview > button {
+  max-width: 75px;
 }
 
 .root {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    gap: 8%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 8%;
 }
 
 .link-button {
-    background: none;
-    border: none;
-    padding: 0;
-    color: #00e;
-    cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  color: #00e;
+  cursor: pointer;
 }
 
 .prediction-section {
-    margin-bottom: 4vh;
+  margin-bottom: 4vh;
 }
