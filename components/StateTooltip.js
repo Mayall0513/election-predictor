@@ -33,6 +33,7 @@ export default (props) => {
                 race={race}
                 wide={false}
                 verboseOdds={false}
+                allowsPredictions={false}
                 configuringPrediction={false}
             />
             <span className="tooltip-hint">Click for more information</span>

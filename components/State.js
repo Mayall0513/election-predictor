@@ -34,6 +34,7 @@ export default (props) => {
                         mouseLeft({ stateId, raceId: 0, event: e });
                     }
                 }}
+                
             />
         );
     }

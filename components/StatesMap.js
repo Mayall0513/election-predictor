@@ -44,13 +44,10 @@ export default (props) => {
          stateDrawBatches[drawBatch].push(
             <State
                 key={stateId}
-
                 races={races}
                 stateId={stateId}
                 focused={focused}
                 onClicked={(e) => {
-                    removeHoveredState();
-
                     if (onRaceSelected) {
                         onRaceSelected(e);
                     }
@@ -63,15 +60,20 @@ export default (props) => {
 
     return (
         <>
-            { hoveredRace.race != null && hoveredRace.race != null &&
+            <svg 
+                width="604" 
+                height="380"
+                transform="scale(1.2)"
+                transform-origin="0 0"
+            >
+                {stateDrawBatches}
+            </svg>
+            { hoveredRace.race != null && hoveredRace.state != null &&
                 <Tooltip
                     race={hoveredRace.race}
                     stateName={translations[hoveredRace.state]}
                 />
             }
-            <svg width="604" height="380" role="img">
-                {stateDrawBatches}
-            </svg>
         </>
     )
 };

@@ -1,17 +1,9 @@
 import React, { useState } from "react";
 
-const colours = {
-  rep: "#ff5260",
-  dem: "#6eb1f5",
-  ind: "#ffb721",
-  oth: "#9a9a9a",
-};
-
 const wagerRegex = /[^0-9]/g;
 
 export default (props) => {
-  const { race, wide, verboseOdds, configuringPrediction, predictionEdited } =
-    props;
+  const { race, wide, verboseOdds, allowsPredictions, configuringPrediction, predictionEdited } = props;
 
   const [predictions, setPredictions] = useState([]);
 
@@ -33,6 +25,8 @@ export default (props) => {
   let candidateBetsTotal = 0;
   let key = 0;
 
+  race.candidates = race.candidates.sort((x, y) => y.bet_total - x.bet_total);
+
   for (const candidate of race.candidates) {
     if (candidate.bet_total) {
       candidateBetsTotal += candidate.bet_total;
@@ -43,7 +37,7 @@ export default (props) => {
     <table className="table">
       <thead className="table-heading">
         <tr>
-          <th className={wide ? "min-width-12" : "min-width-8"}>Candidates</th>
+          <th className={wide ? "min-width-12" : "min-width-10"}>Candidates</th>
           {verboseOdds && (
             <th>
               <span>Odds </span>
@@ -64,29 +58,24 @@ export default (props) => {
         </tr>
       </thead>
       <tbody>
-        {race.candidates.map((candidate, i) => {
-          const color = colours[candidate.party]
-            ? colours[candidate.party]
-            : colours["ind"];
+        { race.candidates.map((candidate, i) => {
+          const party = ['rep', 'dem', 'ind', 'oth'].includes(candidate.party) ? 'candidate-' + candidate.party : 'candidate-oth';
 
           const odds = Math.max(
             Math.floor(
               (candidateBetsTotal === 0
                 ? 1 / race.candidates.length
-                : candidate.bet_total / candidateBetsTotal) * 100
-            ),
+                : candidate.bet_total / candidateBetsTotal) * 1000
+            ) / 10,
             1
           );
 
           return (
-            <tr key={++key} style={{ color }}>
+            <tr key={++key} className={party}>
               <td>
                 <span>{candidate.name}</span>
                 {candidate.incumbent && (
-                  <span
-                    className="incumbent"
-                    style={{ backgroundColor: color }}
-                  >
+                  <span className="incumbent">
                     i
                   </span>
                 )}

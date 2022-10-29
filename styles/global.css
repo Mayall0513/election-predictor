@@ -2,7 +2,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 100;
   background-color: #1b1e2b;
-  color: white;
+  color: #eaeaea;
 }
 
 .state {
@@ -35,7 +35,7 @@ body {
   outline-color: #8c8c8c;
   padding: 4px;
   user-select: none;
-  color: black;
+  color: #0a0a0a;
 }
 
 .tooltip-title {
@@ -62,12 +62,14 @@ body {
 .table-text-input {
   border: none;
   border-bottom: 1px solid #a9a9a9;
+  color: #eaeaea;
   max-width: 60px;
   max-height: 12px;
+  background-color: transparent;
 }
 
-.min-width-8 {
-  min-width: 8vw;
+.min-width-10 {
+  min-width: 10vw;
 }
 
 .min-width-12 {
@@ -90,21 +92,12 @@ body {
   margin-left: 6px;
 }
 
-.map-parent {
-  display: inline-block;
-  flex-grow: 0;
-}
-
 .race-overview {
   display: inline-block;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.race-overview > button {
-  max-width: 75px;
 }
 
 .root {
@@ -132,4 +125,67 @@ button {
   border: none;
   color: white;
   padding: 5px;
+  cursor: pointer;
+}
+
+.race-overview > button {
+  max-width: 75px;
+}
+
+.candidate-rep:not(.incumbent) {
+  color: #ff5260;
+}
+
+.candidate-dem:not(.incumbent) {
+  color: #6eb1f5;
+}
+
+.candidate-ind:not(.incumbent) {
+  color: #ffb721;
+}
+
+.candidate-oth:not(.incumbent) {
+  color: #9a9a9a;
+}
+
+.candidate-rep .incumbent {
+  background-color: #ff5260;
+}
+
+.candidate-dem .incumbent {
+  background-color: #6eb1f5;
+}
+
+.candidate-ind .incumbent {
+  background-color: #ffb721;
+}
+
+.candidate-oth .incumbent {
+  background-color: #9a9a9a;
+}
+
+.ribbon {
+  width: 100vw;
+  min-height: 80px;
+}
+
+.modal-parent {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  position: unset;
+  width: 30vw;
+  height: 40vh;
+  background-color: #efefef;
+  color: #0a0a0a;
 }
