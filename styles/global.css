@@ -25,7 +25,7 @@ body {
 
 .state-excluded {
   fill: #ebebeb;
-  stroke: #ebebeb;
+  stroke: #e8e8e8;
 }
 
 .tooltip {
@@ -63,9 +63,14 @@ body {
   border: none;
   border-bottom: 1px solid #a9a9a9;
   color: #eaeaea;
-  max-width: 60px;
+  max-width: 80px;
   max-height: 12px;
   background-color: transparent;
+}
+
+.table-text-input-error {
+  border: none;
+  border-bottom: 1px solid #ef0000;
 }
 
 .min-width-10 {
@@ -77,7 +82,7 @@ body {
 }
 
 .padding-left-1 {
-  padding-left: 1vw;
+  padding-left: 1vw !important;
 }
 
 .incumbent {
@@ -164,11 +169,6 @@ button {
   background-color: #9a9a9a;
 }
 
-.ribbon {
-  width: 100vw;
-  min-height: 80px;
-}
-
 .modal-parent {
   position: fixed;
   z-index: 1;
@@ -188,4 +188,69 @@ button {
   height: 40vh;
   background-color: #efefef;
   color: #0a0a0a;
+}
+
+.static-tooltip {
+  position: relative;
+}
+
+.static-tooltip .static-tooltip-contents {
+  display: none;
+
+  position: absolute;
+  text-align: left;
+  width: 20vw;
+  cursor: auto;
+}
+
+.static-tooltip:hover .static-tooltip-contents {
+  display: block;
+}
+
+.input-error {
+  color: #ff0000;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
+.ribbon-container {
+  width: 100%;
+  height: 80px;
+  border-bottom: 1px solid #c8c8c8;
+}
+
+.ribbon {
+  margin: 24px;
+  display: flex;
+  place-content: space-between;
+  align-items: center;
+  justify-content: middle;  
+}
+
+.ribbon-item {
+  flex: 1;
+  text-align: center;
+}
+
+.flex-4 {
+  flex: 4!important;
+}
+
+.account-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  gap: 2%
+}
+
+.account-details-section {
+  display: inline-grid;
+}
+
+.map {
+  min-width: 728px;
+  min-height: 456px;
 }

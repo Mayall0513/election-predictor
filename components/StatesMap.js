@@ -61,10 +61,12 @@ export default (props) => {
     return (
         <>
             <svg 
-                width="604" 
+                width="604"
                 height="380"
                 transform="scale(1.2)"
                 transform-origin="0 0"
+                onMouseLeave={removeHoveredState}
+                className="map"
             >
                 {stateDrawBatches}
             </svg>

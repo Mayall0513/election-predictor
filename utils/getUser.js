@@ -1,7 +1,8 @@
 import cookie from 'cookie';
 import jwt from 'jsonwebtoken';
+import axios from 'axios';
 
-export default function getUser(context) {
+export default async function getUser(context) {
     if (!context.req.headers.cookie) {
         return null;
     }
@@ -22,7 +23,9 @@ export default function getUser(context) {
             return null;
         }
 
-        return { id: jwtContents.id, username: jwtContents.username, avatar: jwtContents.avatar };
+        const xp = await axios.get(process.env.BACKEND_URI + "/users/xp?id=" + jwtContents.id);
+
+        return { id: jwtContents.id, username: jwtContents.username, avatar: jwtContents.avatar, xp: xp.data.experience};
     }
 
     catch {

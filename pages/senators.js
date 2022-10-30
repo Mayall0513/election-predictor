@@ -17,7 +17,6 @@ export default function (props) {
       ? states[defaultFocusedState].races[defaultFocusedRaceIndex]
       : null;
 
-    const [configuringPrediction, setConfiguringPrediction] = useState(false);
     const [focusedRace, setFocusedRace] = useState({ state: defaultFocusedState, race: defaultFocusedRace });
 
     const onRaceSelected = (e) => {
@@ -36,26 +35,24 @@ export default function (props) {
       <>
           <Ribbon user={user}/>
           <div className="root">
-              <div className="map-parent">
-                  <StatesMap
-                      states={states}
-                      onRaceSelected={onRaceSelected}
-                      focusedRace={focusedRace}
-                  />
-              </div>
-              <PredictionPanel 
-                  user={user}
-                  title="Select a state to make a senate race prediction"
-                  focusedRace={focusedRace}
-                  removeSelectedState={removeSelectedState}
-              />
+                <StatesMap
+                    states={states}
+                    onRaceSelected={onRaceSelected}
+                    focusedRace={focusedRace}
+                />
+                <PredictionPanel 
+                    user={user}
+                    title="Select a state to make a senate race prediction"
+                    focusedRace={focusedRace}
+                    removeSelectedState={removeSelectedState}
+                />
           </div>
       </>
     );
 }
 
 export async function getServerSideProps(context) {
-  const user = getUser(context);
+  const user = await getUser(context);
   if (!user) {
       return {
           redirect: {
@@ -65,7 +62,7 @@ export async function getServerSideProps(context) {
       };
   }
   
-    const response = await axios.get(process.env.API_URI + "races/senators", 
+    const response = await axios.get(process.env.BACKEND_URI + "/races/senators", 
         {
             headers: {
                 "Content-Type": "application/json",
@@ -73,22 +70,10 @@ export async function getServerSideProps(context) {
         }
     );
     
-    const states = response.data;
-
-    for (const state in states) {
-        for (const race in states[state].races) {
-            states[state].races[race].candidates.push({
-                name: "Other candidate",
-                party: "oth",
-                incumbent: false,
-            });
-        }
-    }
-
     return {
         props: {
             user,
-            states,
+            states: response.data,
             defaultFocusedState: context.query.s || null,
             defaultFocusedRaceIndex: context.query.r || 0,
         },

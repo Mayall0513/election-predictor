@@ -27,20 +27,19 @@ export default function (props) {
 
     const removeSelectedState = () => {
         setFocusedRace({ state: null, race: null });
+        router.push('/governors');
     };
 
     return (
         <>
             <Ribbon user={user}/>
             <div className="root">
-                <div className="map-parent">
-                    <StatesMap
-                        states={states}
-                        onRaceSelected={onRaceSelected}
-                        focusedRace={focusedRace}
-                    />
-                </div>
-                <PredictionPanel 
+                <StatesMap
+                    states={states}
+                    onRaceSelected={onRaceSelected}
+                    focusedRace={focusedRace}
+                />
+               <PredictionPanel 
                     user={user}
                     title="Select a state to make a gubernatorial race prediction"
                     focusedRace={focusedRace}
@@ -52,7 +51,7 @@ export default function (props) {
 }
 
 export async function getServerSideProps(context) {
-    const user = getUser(context);
+    const user = await getUser(context);
     if (!user) {
         return {
             redirect: {
@@ -62,30 +61,18 @@ export async function getServerSideProps(context) {
         };
     }
 
-    const response = await axios.get(process.env.API_URI + "races/governors", 
+    const response = await axios.get(process.env.BACKEND_URI + "/races/governors", 
         {
             headers: {
                 "Content-Type": "application/json",
             }
         }
     );
-    
-    const states = response.data;
-
-    for (const state in states) {
-        for (const race in states[state].races) {
-            states[state].races[race].candidates.push({ 
-                name: "Other Candidate", 
-                party: "oth", 
-                incumbent: false 
-            })
-        }
-    }
 
     return {
         props: {
             user,
-            states,
+            states: response.data,
             defaultFocusedState: context.query.s || null,
             defaultFocusedRaceIndex: context.query.r || 0
         }

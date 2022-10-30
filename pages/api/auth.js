@@ -6,7 +6,7 @@ import axios from 'axios';
 
 export default async function(req, res) {
     if (!req.query.code) {
-        return res.redirect(`https://discord.com/oauth2/authorize?response_type=code&scope=identify&client_id=${process.env.DISCORD_CLIENT_ID}&redirect_uri=${process.env.URI + "api/auth"}`);
+        return res.redirect(`https://discord.com/oauth2/authorize?response_type=code&scope=identify&client_id=${process.env.DISCORD_CLIENT_ID}&redirect_uri=${process.env.FRONTEND_URI + "/api/auth"}`);
     }
 
     try {
@@ -15,11 +15,11 @@ export default async function(req, res) {
             client_secret: process.env.DISCORD_CLIENT_SECRET,
             grant_type: 'authorization_code',
             code: req.query.code,
-            redirect_uri: process.env.URI + "api/auth",
+            redirect_uri: process.env.FRONTEND_URI + "/api/auth",
             scope: 'identify'
         });
 
-        const authoriseResponse = await axios.post(process.env.DISCORD_API_URI + "oauth2/token", body.toString(),
+        const authoriseResponse = await axios.post(process.env.DISCORD_API_URI + "/oauth2/token", body.toString(),
             {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -27,9 +27,7 @@ export default async function(req, res) {
             }
         );
 
-        console.log(authoriseResponse);
-
-        const userResponse = await axios.get(process.env.DISCORD_API_URI + "users/@me",
+        const userResponse = await axios.get(process.env.DISCORD_API_URI + "/users/@me",
             {
                 headers: {
                     'Authorization': `${authoriseResponse.data.token_type} ${authoriseResponse.data.access_token}`
@@ -63,7 +61,7 @@ export default async function(req, res) {
             )
         );
     
-        res.redirect("/governors");
+        res.redirect("/");
     }
 
     catch (error) {
