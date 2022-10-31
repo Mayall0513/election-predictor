@@ -36,6 +36,7 @@ body {
   padding: 4px;
   user-select: none;
   color: #0a0a0a;
+  overflow:visible;
 }
 
 .tooltip-title {
@@ -110,7 +111,6 @@ body {
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: center;
-  gap: 8%;
 }
 
 .link-button {
@@ -199,12 +199,13 @@ button {
 
   position: absolute;
   text-align: left;
-  width: 20vw;
-  cursor: auto;
+  
+  cursor:initial;
 }
 
 .static-tooltip:hover .static-tooltip-contents {
   display: block;
+  min-width: 12vw;
 }
 
 .input-error {

@@ -84,9 +84,7 @@ export default function RaceOverviewTable(props) {
       raceIndex,
       predictions
     };
-
-    console.log(process.env.FRONTEND_URI + '/api/bet/submit')
-
+    
     await axios.post(process.env.FRONTEND_URI + '/api/bet/submit', body,
       {
         withCredentials: true

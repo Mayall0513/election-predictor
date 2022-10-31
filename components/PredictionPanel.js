@@ -16,7 +16,7 @@ export default function PredictionPanel(props) {
     if (focusedRace.state && focusedRace.race) {
         return (
             <div className="race-overview">
-                <h2>The {translations[focusedRace.state]} {focusedRace.race.race_type === 0 ? "gubernatorial" : "senate"} race</h2>
+                <h2>The {translations[focusedRace.state]} {focusedRace.race.raceType === 0 ? "gubernatorial" : "senate"} race</h2>
                 <div className="prediction-section">
                     <RaceOverviewTable
                         user={user}
