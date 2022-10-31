@@ -84,7 +84,7 @@ export default function RaceOverviewTable(props) {
       raceIndex,
       predictions
     };
-    
+
     await axios.post(process.env.FRONTEND_URI + '/api/bet/submit', body,
       {
         withCredentials: true
@@ -93,10 +93,17 @@ export default function RaceOverviewTable(props) {
 
     router.reload();
   }
-
+  
   let key = 0;
-  race.candidates = race.candidates.sort((x, y) => y.odds - x.odds);
+  if (configuringPrediction) {
+    race.candidates = race.candidates.sort((x, y) => y.totalBet - x.totalBet);
+  }
 
+  else {
+    race.candidates = race.candidates.sort((x, y) => y.odds - x.odds);
+  }
+  
+  
   return (
     <>
       { modalVisible &&
@@ -114,9 +121,9 @@ export default function RaceOverviewTable(props) {
       <table className="table">
         <thead className="table-heading">
           <tr>
-            <th className={wide ? "min-width-12" : "min-width-10"}>Candidate</th>
+            <th className={wide ? "min-width-10" : "min-width-8"}>Candidate</th>
             { verboseOdds && (
-                <th className="">
+                <th>
                   <span>Odds </span>
                   <StaticTooltip 
                     contents={
@@ -136,10 +143,11 @@ export default function RaceOverviewTable(props) {
                   />
               </th>
             )}
-            {!verboseOdds && <th>Odds</th>}
-            {configuringPrediction && (
+            { !verboseOdds && <th>Odds</th>}
+            { allowPredictions && <th className="padding-left-1">Total Wagered</th>}
+            { configuringPrediction && (
               <th className="padding-left-1">
-                <span>Wager</span>
+                <span>Your Wager</span>
               </th>
             )}
           </tr>
@@ -152,13 +160,14 @@ export default function RaceOverviewTable(props) {
               <tr key={++key} className={party}>
                 <td>
                   <span>{candidate.name}</span>
-                  {candidate.incumbent && (
+                  { candidate.incumbent && (
                     <span className="incumbent">i</span>
                   )}
                 </td>
-                <td>{candidate.odds === 0 ? '<0.1' : candidate.odds}</td>
-                {configuringPrediction && (
-                  <th>
+                <td className="align-right">{candidate.odds === 0 ? '<0.1' : candidate.odds}</td>
+                { allowPredictions && <td className="align-right">{candidate.totalBet}</td>}
+                { configuringPrediction && (
+                  <td className="align-right">
                     <input
                       type="text"
                       className={"table-text-input " + (validationError ? "table-text-input-error" : "")}
@@ -166,7 +175,7 @@ export default function RaceOverviewTable(props) {
                       placeholder="0"
                       onChange={(e) => onPredictionEdited({ candidate, event: e })}
                     />
-                  </th>
+                  </td>
                 )}
               </tr>
             );

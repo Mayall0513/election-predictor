@@ -51,14 +51,15 @@ const getRaces = async (raceType) => {
       };
     }
 
-    const odds = getCandidateOdds(race_id, race_index, state_id, betTotals, stateRaceCounts);
+    const betInfo = getCandidateBetInfo(race_id, race_index, state_id, betTotals, stateRaceCounts);
 
     const newCandidate = { 
       name: candidate_name, 
       party: candidate_party, 
       incumbent,
       raceId: race_id,
-      odds: Math.floor(odds * 1000) / 10
+      totalBet: betInfo.total,
+      odds: Math.floor(betInfo.percent * 1000) / 10
     };
 
     if (candidate_party === "oth") {
@@ -71,7 +72,7 @@ const getRaces = async (raceType) => {
   return returnArray;
 }
 
-const getCandidateOdds = (race_id, race_index, state_id, betTotals, stateRaceCounts) => {
+const getCandidateBetInfo = (race_id, race_index, state_id, betTotals, stateRaceCounts) => {
   /**
    * This race has any bets
    */
@@ -82,7 +83,7 @@ const getCandidateOdds = (race_id, race_index, state_id, betTotals, stateRaceCou
 
     const raceTotal = betTotals[state_id][race_index].total;
 
-    return betTotal / raceTotal;
+    return { total: betTotal, percent: betTotal / raceTotal };
   }
 
   /**
@@ -90,7 +91,7 @@ const getCandidateOdds = (race_id, race_index, state_id, betTotals, stateRaceCou
    * Base it off the total number
    */
   else {
-    return 1 / stateRaceCounts[state_id][race_index];
+    return { total: 0, percent: 1 / stateRaceCounts[state_id][race_index] };
   }
 }
 

@@ -64,9 +64,8 @@ body {
   border: none;
   border-bottom: 1px solid #a9a9a9;
   color: #eaeaea;
-  max-width: 80px;
-  max-height: 12px;
   background-color: transparent;
+  max-width: 80px;
 }
 
 .table-text-input-error {
@@ -74,12 +73,16 @@ body {
   border-bottom: 1px solid #ef0000;
 }
 
-.min-width-10 {
-  min-width: 10vw;
+.min-width-4 {
+  min-width: 4vw;
 }
 
-.min-width-12 {
-  min-width: 12vw;
+.min-width-8 {
+  min-width: 8vw;
+}
+
+.min-width-10 {
+  min-width: 10vw;
 }
 
 .padding-left-1 {
@@ -254,4 +257,8 @@ button {
 .map {
   min-width: 728px;
   min-height: 456px;
+}
+
+.align-right {
+  text-align: right;
 }
