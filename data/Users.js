@@ -1,5 +1,7 @@
 import databasePool from "./Database";
 
+import axios from 'axios';
+
 import jwt from 'jsonwebtoken';
 
 const pageSize = 1000;
@@ -11,10 +13,21 @@ const getUserXp = async (userId) => {
         where user_id=${userId}
     `);
 
+    const userBets = await databasePool.query(`
+        select bet_amount
+        from bets 
+        where user_id=${userId}
+    `);
+
+    let xpWagered = 0;
+    for (const userbet of userBets.rows) {
+      xpWagered += parseInt(userbet.bet_amount);
+    }
+    
     return parseInt(userRows.rows.length === 0 ?
         await cacheUserXp(userId) :
         userRows.rows[0].experience
-    );
+    ) - xpWagered;
 };
 
 const cacheUserXp = async (userId) => {
@@ -61,13 +74,13 @@ const getSignedInUser = async (req) => {
   if (req.cookies[process.env.AUTH_COOKIE_NAME]) {
     try {
         const { id, username, avatar } = jwt.verify(req.cookies[process.env.AUTH_COOKIE_NAME], process.env.JWT_SECRET);
-        //const xp = await getUserXp(id);
+        const xp = await getUserXp(id);
 
         return { 
           id, 
           username, 
           avatar,
-          //xp
+          xp
         };
     }
     

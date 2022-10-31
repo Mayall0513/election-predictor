@@ -34,7 +34,7 @@ export default async (req, res) => {
     
             await databasePool.query(`
                 insert into 
-                public.bets 
+                bets 
                 (
                     user_id, 
                     race_id, 

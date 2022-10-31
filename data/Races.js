@@ -3,24 +3,39 @@ import databasePool from "./Database";
 const getRaces = async (raceType) => {
   const response = await databasePool.query(
     `
-      SELECT 
+      select 
         race_id, 
         race_index, 
         state_id, 
         candidate_name, 
         candidate_party, 
         incumbent 
-      FROM races 
-      WHERE race_type=${raceType}
+      from races 
+      where race_type=${raceType}
     `
   );
 
+  const stateRaceCounts = {};
+  const betTotals = await getRaceBetTotals(raceType);
+
+  for (const row of response.rows) {
+    const { state_id, race_index } = row;
+
+    if (!stateRaceCounts[state_id]) {
+      stateRaceCounts[state_id] = {};
+    }
+
+    if (!stateRaceCounts[state_id][race_index]) {
+      stateRaceCounts[state_id][race_index] = 0;
+    }
+
+    stateRaceCounts[state_id][race_index]++;
+  }
+
   const returnArray = {};
-  
+
   for (const row of response.rows) {
     const { race_id, race_index, state_id, candidate_name, candidate_party, incumbent } = row;
-    const betTotals = await getRaceBetTotals(raceType, race_index, state_id);
-
     if (!returnArray[state_id]) {
       returnArray[state_id] = {
         races: []
@@ -36,12 +51,14 @@ const getRaces = async (raceType) => {
       };
     }
 
+    const odds = getCandidateOdds(race_id, race_index, state_id, betTotals, stateRaceCounts);
+
     const newCandidate = { 
       name: candidate_name, 
       party: candidate_party, 
       incumbent,
       raceId: race_id,
-      odds: Math.floor(betTotals[race_id] * 10) / 10
+      odds: Math.floor(odds * 1000) / 10
     };
 
     if (candidate_party === "oth") {
@@ -54,55 +71,63 @@ const getRaces = async (raceType) => {
   return returnArray;
 }
 
-const getRaceBetTotals = async (raceType, raceIndex, stateId) => {
-  const betTotals = {};
+const getCandidateOdds = (race_id, race_index, state_id, betTotals, stateRaceCounts) => {
+  /**
+   * This race has any bets
+   */
+  if (betTotals[state_id] && betTotals[state_id][race_index]) {
+    const betTotal = betTotals[state_id][race_index][race_id] ? 
+      parseInt(betTotals[state_id][race_index][race_id]) :
+      0;
 
-  const relevantRaces = await databasePool.query(`
-    select 
-      race_id
-    from 
-      races 
-    where 
-      races.race_type=${raceType} and 
-      races.race_index=${raceIndex} and 
-      races.state_id='${stateId}'
-  `);
+    const raceTotal = betTotals[state_id][race_index].total;
 
-  for (const relevantRace of relevantRaces.rows) {
-    betTotals[relevantRace.race_id] = 0;
+    return betTotal / raceTotal;
   }
+
+  /**
+   * This race has no bets
+   * Base it off the total number
+   */
+  else {
+    return 1 / stateRaceCounts[state_id][race_index];
+  }
+}
+
+const getRaceBetTotals = async (raceType) => {
+  const betTotals = {};
 
   const relevantBets = await databasePool.query(`
     select 
-      bets.race_id,
+      races.race_id,
+      races.race_index,
+      races.state_id,
       bets.bet_amount
     from 
       races
     right join bets
       on races.race_id = bets.race_id 
     where 
-      races.race_type=${raceType} and 
-      races.race_index=${raceIndex} and 
-      races.state_id='${stateId}'
+      races.race_type=${raceType}
   `);
 
   for (const relevantBet of relevantBets.rows) {
-    betTotals[relevantBet.race_id] += parseInt(relevantBet.bet_amount);
-  }
-
-  let betTotal = 0;
-  for (const raceId in betTotals) {
-    betTotal += betTotals[raceId];
-  }
-
-  for (const raceId in betTotals) {
-    if (betTotal === 0) {
-      betTotals[raceId] = (1 / Object.keys(betTotals).length) * 100
+    const { race_id, state_id, race_index, bet_amount } = relevantBet;
+    if (!betTotals[state_id]) {
+      betTotals[state_id] = {};
     }
 
-    else {
-      betTotals[raceId] = Math.max(betTotals[raceId] / betTotal) * 100
+    if (!betTotals[state_id][race_index]) {
+      betTotals[state_id][race_index] = { total: 0};
     }
+
+    if (!betTotals[state_id][race_index][race_id]) {
+      betTotals[state_id][race_index][race_id] = 0;
+    }
+
+    const bet_amount_int = parseInt(bet_amount);
+    betTotals[state_id][race_index].total += bet_amount_int;
+    betTotals[state_id][race_index][race_id] += bet_amount_int;
   }
 
   return betTotals;

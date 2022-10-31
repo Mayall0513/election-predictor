@@ -69,6 +69,7 @@ export async function getServerSideProps(context) {
         }
     );
 
+
     /**
      * If the returned states does not contain the race, race = null
      * Otherwise, race = race
