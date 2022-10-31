@@ -1,6 +1,6 @@
 import cookie from 'cookie';
 
-export default function(req, res) {
+export default (req, res) => {
     res.setHeader('Set-Cookie',
         cookie.serialize(process.env.AUTH_COOKIE_NAME, '', 
             {
@@ -10,5 +10,11 @@ export default function(req, res) {
         )
     );
 
-    res.redirect("/api/auth");
+    res.status(200).redirect("/");
+}
+
+export const config = {
+    api: {
+        bodyParser: false,
+    }
 }

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 export default (props) => {
     const { user } = props;
     const router = useRouter();
-
+    
     return (
         <div className="ribbon-container">
             <div className="ribbon">
@@ -39,7 +39,7 @@ export default (props) => {
                                         type="button" 
                                         className="link-button"
                                         onClick={(e) => {
-                                            router.push("/api/signout");
+                                            router.push("/api/auth/signout");
                                         }}>
                                         Sign out
                                     </button>
@@ -52,7 +52,7 @@ export default (props) => {
                                 type="button" 
                                 className="link-button"
                                 onClick={(e) => {
-                                    router.push("/api/auth");
+                                    router.push("/api/auth/signin");
                                 }}>
                                 Sign in
                             </button>

@@ -53,7 +53,6 @@ export default (props) => {
                     }
                 }}
                 mouseEntered={onMouseEnterState}
-                mouseLeft={removeHoveredState}
             />
         );
     }
@@ -65,8 +64,8 @@ export default (props) => {
                 height="380"
                 transform="scale(1.2)"
                 transform-origin="0 0"
-                onMouseLeave={removeHoveredState}
                 className="map"
+                onMouseOut={removeHoveredState}
             >
                 {stateDrawBatches}
             </svg>

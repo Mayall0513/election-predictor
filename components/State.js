@@ -3,7 +3,7 @@ import React from 'react';
 import { paths as statePaths } from '../data/States';
 
 export default (props) => {
-    const { races, stateId, focused, onClicked, mouseEntered, mouseLeft } = props;
+    const { races, stateId, focused, onClicked, mouseEntered } = props;
 
     if (races.length === 0) {
         return (
@@ -29,12 +29,6 @@ export default (props) => {
                         mouseEntered({ stateId, raceId: 0, event: e });
                     }
                 }}
-                onMouseLeave={(e) => { 
-                    if (mouseLeft) {
-                        mouseLeft({ stateId, raceId: 0, event: e });
-                    }
-                }}
-                
             />
         );
     }

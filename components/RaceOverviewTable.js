@@ -68,24 +68,26 @@ export default (props) => {
     const { value } = e.event.target;
 
     const newPrediction = value.replace(wagerRegex, "");
-    if (newPrediction != predictions[candidate.race_id]) {
+    if (newPrediction != predictions[candidate.raceId]) {
       const newPredictions = { ...predictions };
-      newPredictions[candidate.race_id] = newPrediction;
+      newPredictions[candidate.raceId] = newPrediction;
 
       setPredictions(newPredictions);
     }
   };
 
   const onSubmitPrediction = async (e) => {
-    const { state_id, race_type, race_index } = race;
+    const { stateId, raceType, raceIndex } = race;
     const body = {
-      state_id,
-      race_type,
-      race_index,
+      stateId,
+      raceType,
+      raceIndex,
       predictions
     };
 
-    await axios.post(process.env.BACKEND_URI + '/bet/submit', body,
+    console.log(process.env.FRONTEND_URI + '/api/bet/submit')
+
+    await axios.post(process.env.FRONTEND_URI + '/api/bet/submit', body,
       {
         withCredentials: true
       }
@@ -162,7 +164,7 @@ export default (props) => {
                     <input
                       type="text"
                       className={"table-text-input " + (validationError ? "table-text-input-error" : "")}
-                      value={predictions[candidate.race_id] ? predictions[candidate.race_id] : ""}
+                      value={predictions[candidate.raceId] ? predictions[candidate.raceId] : ""}
                       placeholder="0"
                       onChange={(e) => onPredictionEdited({ candidate, event: e })}
                     />

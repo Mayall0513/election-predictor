@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 
 import axios from 'axios';
-import getUser from "../utils/getUser";
 
 import PredictionPanel from "../components/PredictionPanel";
 import StatesMap from "../components/StatesMap";
 import Ribbon from "../components/Ribbon";
+import { getSignedInUser } from '../data/Users';
 
 export default function (props) {
     const { user, states, defaultFocusedState, defaultFocusedRaceIndex } = props;
@@ -51,17 +51,17 @@ export default function (props) {
 }
 
 export async function getServerSideProps(context) {
-    const user = await getUser(context);
+    const user = await getSignedInUser(context.req);
     if (!user) {
         return {
             redirect: {
-                destination: 'api/auth',
+                destination: '/api/auth/signin',
                 permanent: false
             }
         };
     }
 
-    const response = await axios.get(process.env.BACKEND_URI + "/races/governors", 
+    const states = await axios.get(process.env.FRONTEND_URI + "/api/races/governors", 
         {
             headers: {
                 "Content-Type": "application/json",
@@ -69,12 +69,31 @@ export async function getServerSideProps(context) {
         }
     );
 
-    return {
-        props: {
-            user,
-            states: response.data,
-            defaultFocusedState: context.query.s || null,
-            defaultFocusedRaceIndex: context.query.r || 0
-        }
-    }
+    /**
+     * If the returned states does not contain the race, race = null
+     * Otherwise, race = race
+     */
+     const defaultFocusedState = Object.keys(states.data).includes(context.query.s) ? context.query.s : null;
+
+     /**
+      * If there is no state, index = null
+      * If the index is not a number, index = 0
+      * If the index is below 0, index = 0
+      * If the index is above the actual number of races, index = last race
+      * Otherwise, index = index
+      */
+     const defaultFocusedRaceIndex = defaultFocusedState == null ? null : 
+         Math.min(
+             isNaN(parseInt(context.query.r)) || parseInt(context.query.r) < 0 ? 0 : context.query.r,
+             states.data[defaultFocusedState].races.length - 1
+         );
+ 
+     return {
+         props: {
+             user: user,
+             states: states.data,
+             defaultFocusedState,
+             defaultFocusedRaceIndex,
+         },
+     };
 }
