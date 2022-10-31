@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import RaceOverviewTable from './RaceOverviewTable';
 
-export default (props) => {
+export default function StateTooltip(props) {
     const { race, stateName } = props;
     const [ mouseCoordinates, setMouseCoordinates] = useState({ x: 0, y: -1000 });
 

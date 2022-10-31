@@ -3,7 +3,7 @@ import React from "react";
 import Ribbon from "../components/Ribbon";
 import { getSignedInUser } from '../data/Users';
 
-export default function (props) {
+export default function index(props) {
     const { user } = props;
 
     return (
@@ -13,7 +13,7 @@ export default function (props) {
 
 export async function getServerSideProps(context) {
     const user = await getSignedInUser(context.req);
-    
+
     return {
         props: {
             user

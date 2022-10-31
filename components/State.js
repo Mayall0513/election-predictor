@@ -2,7 +2,7 @@ import React from 'react';
 
 import { paths as statePaths } from '../data/States';
 
-export default (props) => {
+export default function State(props) {
     const { races, stateId, focused, onClicked, mouseEntered } = props;
 
     if (races.length === 0) {

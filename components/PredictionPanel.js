@@ -4,7 +4,7 @@ import RaceOverviewTable from "./RaceOverviewTable";
 
 import { translations } from "../data/States";
 
-export default (props) => {
+export default function PredictionPanel(props) {
     const { user, title, focusedRace, removeSelectedState } = props;
 
     const onCancel = (e) => {

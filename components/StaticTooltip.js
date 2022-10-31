@@ -1,4 +1,4 @@
-export default (props) => {
+export default function StaticTooltip(props) {
     const { contents } = props;
 
     return (

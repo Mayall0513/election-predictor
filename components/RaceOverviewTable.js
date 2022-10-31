@@ -12,7 +12,7 @@ const wagerRegex = /[^0-9]/g;
  * Only use this once per page!
  * I don't think the modal will play nice :(
  */
-export default (props) => {
+export default function RaceOverviewTable(props) {
   const { user, race, wide, verboseOdds, allowPredictions } = props;
   const router = useRouter();
 

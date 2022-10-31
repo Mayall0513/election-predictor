@@ -6,7 +6,7 @@ import Tooltip from './StateTooltip';
 import { ids as stateIds } from '../data/States';
 import { translations } from "../data/States";
 
-export default (props) => {
+export default function StatesMap(props) {
     const { states, onRaceSelected, focusedRace } = props;
 
     const [ hoveredRace, setHoveredRace ] = useState({ state: null, race: null });

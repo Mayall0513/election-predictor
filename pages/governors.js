@@ -8,7 +8,7 @@ import StatesMap from "../components/StatesMap";
 import Ribbon from "../components/Ribbon";
 import { getSignedInUser } from '../data/Users';
 
-export default function (props) {
+export default function governors(props) {
     const { user, states, defaultFocusedState, defaultFocusedRaceIndex } = props;
     const router = useRouter();
 
