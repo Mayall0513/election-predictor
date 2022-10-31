@@ -61,13 +61,13 @@ const getSignedInUser = async (req) => {
   if (req.cookies[process.env.AUTH_COOKIE_NAME]) {
     try {
         const { id, username, avatar } = jwt.verify(req.cookies[process.env.AUTH_COOKIE_NAME], process.env.JWT_SECRET);
-        const xp = await getUserXp(id);
+        //const xp = await getUserXp(id);
 
         return { 
           id, 
           username, 
           avatar,
-          xp
+          //xp
         };
     }
     
