@@ -3,7 +3,7 @@ import React from "react";
 import Ribbon from "../components/Ribbon";
 import { getSignedInUser } from '../data/Users';
 
-export default function index(props) {
+export default function Index(props) {
     const { user } = props;
 
     return (
