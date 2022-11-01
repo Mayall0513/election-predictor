@@ -9,7 +9,7 @@ export default function Ribbon(props) {
         <div className="ribbon-container">
             <div className="ribbon">
                 <div className="ribbon-item">
-                    {"\\<put website name here>"}
+                    {"<put website name here>"}
                 </div>
                 <div className="ribbon-item flex-4 ">
                     <button 
