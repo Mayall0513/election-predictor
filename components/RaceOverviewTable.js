@@ -95,8 +95,6 @@ export default function RaceOverviewTable(props) {
   }
   
   let key = 0;
-  race.candidates = race.candidates.sort((x, y) => y.totalBet - x.totalBet);
-
   return (
     <>
       { modalVisible &&

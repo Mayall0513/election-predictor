@@ -61,7 +61,7 @@ export async function getServerSideProps(context) {
         };
     }
 
-    const states = await axios.get(process.env.FRONTEND_URI + "/api/races/governors", 
+    const statesResponse = await axios.get(process.env.FRONTEND_URI + "/api/races/governors", 
         {
             headers: {
                 "Content-Type": "application/json",
@@ -69,11 +69,21 @@ export async function getServerSideProps(context) {
         }
     );
 
+    const states = statesResponse.data;
+    
+    for (const stateId in states) {
+        const state = states[stateId];
+        
+        for (const raceId in state.races) {
+            state.races[raceId].candidates = state.races[raceId].candidates.sort((x, y) => y.totalBet - x.totalBet)
+        }
+    }
+
     /**
      * If the returned states does not contain the race, race = null
      * Otherwise, race = race
      */
-     const defaultFocusedState = Object.keys(states.data).includes(context.query.s) ? context.query.s : null;
+     const defaultFocusedState = Object.keys(states).includes(context.query.s) ? context.query.s : null;
 
      /**
       * If there is no state, index = null
@@ -85,13 +95,13 @@ export async function getServerSideProps(context) {
      const defaultFocusedRaceIndex = defaultFocusedState == null ? null : 
          Math.min(
              isNaN(parseInt(context.query.r)) || parseInt(context.query.r) < 0 ? 0 : context.query.r,
-             states.data[defaultFocusedState].races.length - 1
+             states[defaultFocusedState].races.length - 1
          );
  
      return {
          props: {
              user: user,
-             states: states.data,
+             states: states,
              defaultFocusedState,
              defaultFocusedRaceIndex,
          },

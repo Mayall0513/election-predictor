@@ -2,6 +2,23 @@ import React from 'react';
 
 import { paths as statePaths } from '../data/States';
 
+import partyColours from "../data/Parties";
+
+const defaultStateColor = {
+    r: 218,
+    g: 218,
+    b: 218
+}
+
+const lerp = (first, second, percent) => {
+    return {
+        r: second.r + ((first.r - second.r) * percent),
+        g: second.g + ((first.g - second.g) * percent),
+        b: second.b + ((first.b - second.b) * percent)
+    }
+};
+
+
 export default function State(props) {
     const { races, stateId, focused, onClicked, mouseEntered } = props;
 
@@ -15,21 +32,54 @@ export default function State(props) {
     }
 
     else {
-        return (
-            <path
-                className={"state" + (focused ? " state-focused" : "")}
-                d={statePaths[stateId]}
-                onClick={(e) => { 
-                    if (onClicked) {
-                        onClicked({ stateId, raceId: 0, event: e }); 
-                    }
-                }}
-                onMouseEnter={(e) => { 
-                    if (mouseEntered) {
-                        mouseEntered({ stateId, raceId: 0, event: e });
-                    }
-                }}
-            />
-        );
+        const race = races[0];
+        const candidateLead = race.candidates[0].odds - races[0].candidates[1].odds;
+
+        const className = "state " + (focused ? "state-focused" : "");
+
+        if (candidateLead < 1) {
+            return (
+                <path
+                    className={className}
+                    fill="#dadada"
+                    d={statePaths[stateId]}
+                    onClick={(e) => { 
+                        if (onClicked) {
+                            onClicked({ stateId, raceId: 0, event: e }); 
+                        }
+                    }}
+                    onMouseEnter={(e) => { 
+                        if (mouseEntered) {
+                            mouseEntered({ stateId, raceId: 0, event: e });
+                        }
+                    }}
+                />
+            );
+        }
+
+        else {
+            const leadingCandidateParty = race.candidates[0].party || 'oth';
+            const leadingCandidateColor = partyColours[leadingCandidateParty];
+            const candidateLeadPercent = candidateLead / 100;
+            const { r, g, b } = lerp(leadingCandidateColor, defaultStateColor, candidateLeadPercent);           
+
+            return (
+                <path
+                    className={className}
+                    fill={`rgb(${r}, ${g}, ${b})`}
+                    d={statePaths[stateId]}
+                    onClick={(e) => { 
+                        if (onClicked) {
+                            onClicked({ stateId, raceId: 0, event: e }); 
+                        }
+                    }}
+                    onMouseEnter={(e) => { 
+                        if (mouseEntered) {
+                            mouseEntered({ stateId, raceId: 0, event: e });
+                        }
+                    }}
+                />
+            );
+        }
     }
 }

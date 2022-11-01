@@ -64,7 +64,7 @@ button {
 }
 
 .flex-4 {
-  flex: 4 !important;
+  flex: 4!important;
 }
 
 .incumbent {
@@ -185,7 +185,6 @@ button {
 }
 
 .state {
-  fill: #dadada;
   stroke: #c8c8c8;
   stroke-width: 1;
 }
@@ -203,7 +202,6 @@ button {
 
 .state:hover:not(.state-excluded):not(.state-focused) {
   cursor: pointer;
-  fill: #d0d0d0;
   stroke: #bababa;
 }
 

@@ -41,7 +41,7 @@ export default function StatesMap(props) {
                 3 :
                 1;
         
-         stateDrawBatches[drawBatch].push(
+        stateDrawBatches[drawBatch].push(
             <State
                 key={stateId}
                 races={races}
