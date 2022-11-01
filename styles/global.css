@@ -118,10 +118,11 @@ button {
 
 .modal {
   position: unset;
-  width: 30vw;
-  height: 40vh;
   background-color: #efefef;
   color: #0a0a0a;
+  text-align: center;
+  padding: 30px 20px 20px 20px;
+  border-radius: 20px;
 }
 
 .modal-parent {
@@ -139,6 +140,10 @@ button {
 
 .padding-left-1 {
   padding-left: 1vw !important;
+}
+
+.margin-left-1 {
+  margin-left: 1vw !important;
 }
 
 .prediction-section {
@@ -229,7 +234,7 @@ button {
   border-collapse: collapse;
 }
 
-.table-heading {
+.align-left {
   text-align: left;
 }
 

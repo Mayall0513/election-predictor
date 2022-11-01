@@ -20,6 +20,7 @@ export default function RaceOverviewTable(props) {
   const [configuringPrediction, setConfiguringPrediction] = useState(false);
   const [validationError, setValidationError] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [wagerTotal, setWagerTotal] = useState(0);
 
   const onMakePrediction = (e) => {
     const predictionValues = Object.values(predictions);
@@ -28,11 +29,11 @@ export default function RaceOverviewTable(props) {
       return;
     }
 
-    let totalPredictionXp = 0;
+    let wagerTotal = 0;
 
     for (const predictionValue of predictionValues) {
       try {
-        totalPredictionXp += parseInt(predictionValue);
+        wagerTotal += parseInt(predictionValue);
       }
       
       catch(error) {
@@ -41,15 +42,18 @@ export default function RaceOverviewTable(props) {
       }
     }
 
-    if (totalPredictionXp > user.xp) {
+    if (wagerTotal > user.xp) {
       setValidationError('You do not have enough xp to make this wager!');
       return;
     }
+
+    
 
     if (validationError) {
       setValidationError(null);
     }
 
+    setWagerTotal(wagerTotal);
     setModalVisible(true);
   }
 
@@ -101,16 +105,19 @@ export default function RaceOverviewTable(props) {
         <div className="modal-parent">
             <div className="modal">
                 <h2>Are you sure?</h2>
-                <p>This cannot be undone</p>
-                <span>
-                    <button type="button" onClick={onSubmitPrediction}>Yes</button>
-                    <button type="button>" onClick={() => setModalVisible(false)}>Cancel</button>
-                </span>
+                <div className="align-left">
+                  <p>This will cost you {wagerTotal} experience and cannot be undone!</p>
+                  <span>
+                      <button type="button" onClick={onSubmitPrediction}>Yes</button>
+                      <button type="button" className="margin-left-1" onClick={() => setModalVisible(false)}>Cancel</button>
+                  </span>
+                </div>
+
             </div>
         </div>
       }
       <table className="table">
-        <thead className="table-heading">
+        <thead className="align-left">
           <tr>
             <th className={wide ? "min-width-10" : "min-width-8"}>Candidate</th>
             { verboseOdds && (
