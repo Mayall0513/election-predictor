@@ -5,16 +5,194 @@ body {
   color: #eaeaea;
 }
 
+button {
+  background-color: rgb(0, 115, 128);
+  border: none;
+  color: white;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.account-details-section {
+  display: inline-grid;
+}
+
+.account-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  gap: 2%
+}
+
+.align-right {
+  text-align: right;
+}.avatar {
+  border-radius: 50%;
+}
+
+.candidate-dem .incumbent {
+  background-color: #6eb1f5;
+}
+
+.candidate-dem:not(.incumbent) {
+  color: #6eb1f5;
+}
+
+.candidate-ind .incumbent {
+  background-color: #ffb721;
+}
+
+.candidate-ind:not(.incumbent) {
+  color: #ffb721;
+}
+
+.candidate-oth .incumbent {
+  background-color: #9a9a9a;
+}
+
+.candidate-oth:not(.incumbent) {
+  color: #9a9a9a;
+}
+
+.candidate-rep .incumbent {
+  background-color: #ff5260;
+}
+
+.candidate-rep:not(.incumbent) {
+  color: #ff5260;
+}
+
+.flex-4 {
+  flex: 4!important;
+}
+
+.incumbent {
+  margin: 0px;
+  padding: 0px;
+  border-radius: 50%;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  color: #efefef;
+  text-align: center;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+.incumbent-parent {
+  display: flex;
+  flex-flow: row;
+  justify-content: left;
+  align-items: center;
+}
+
+.input-error {
+  color: #ff0000;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #5291ff;
+  cursor: pointer;
+}
+
+.map {
+  width: 664px;
+  height: 418px;
+}
+
+.min-width-10 {
+  min-width: 10vw;
+}
+
+.min-width-4 {
+  min-width: 4vw;
+}
+
+.min-width-8 {
+  min-width: 8vw;
+}
+
+.modal {
+  position: unset;
+  width: 30vw;
+  height: 40vh;
+  background-color: #efefef;
+  color: #0a0a0a;
+}
+
+.modal-parent {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.padding-left-1 {
+  padding-left: 1vw !important;
+}
+
+.prediction-section {
+  margin-bottom: 4vh;
+}
+
+.race-overview > button {
+  max-width: 75px;
+}
+
+.race-overview {
+  padding-top: 10vh;
+  display: inline-block;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ribbon {
+  margin: 24px;
+  display: flex;
+  place-content: space-between;
+  align-items: center;
+  justify-content: middle;  
+}
+
+.ribbon-container {
+  width: 100%;
+  height: 80px;
+  border-bottom: 1px solid #c8c8c8;
+}
+
+.ribbon-item {
+  flex: 1;
+  text-align: center;
+}
+
+.root {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
 .state {
   fill: #dadada;
   stroke: #c8c8c8;
   stroke-width: 1;
 }
 
-.state:hover:not(.state-excluded):not(.state-focused) {
-  cursor: pointer;
-  fill: #d0d0d0;
-  stroke: #bababa;
+.state-excluded {
+  fill: #ebebeb;
+  stroke: #e8e8e8;
 }
 
 .state:active:not(.state-excluded),
@@ -23,29 +201,26 @@ body {
   stroke: #6a6a6a !important;
 }
 
-.state-excluded {
-  fill: #ebebeb;
-  stroke: #e8e8e8;
+.state:hover:not(.state-excluded):not(.state-focused) {
+  cursor: pointer;
+  fill: #d0d0d0;
+  stroke: #bababa;
 }
 
-.tooltip {
-  background-color: #efefef;
-  outline-style: solid;
-  outline-width: 1px;
-  outline-color: #8c8c8c;
-  padding: 4px;
-  user-select: none;
-  color: #0a0a0a;
-  overflow:visible;
+.static-tooltip .static-tooltip-contents {
+  display: none;
+  position: absolute;
+  text-align: left;
+  cursor: initial;
 }
 
-.tooltip-title {
-  margin-top: 0px;
+.static-tooltip {
+  position: relative;
 }
 
-.tooltip-hint {
-  font-size: 80%;
-  margin-bottom: 0px;
+.static-tooltip:hover .static-tooltip-contents {
+  display: block;
+  min-width: 12vw;
 }
 
 .table {
@@ -73,199 +248,34 @@ body {
   border-bottom: 1px solid #ef0000;
 }
 
-.min-width-4 {
-  min-width: 4vw;
-}
-
-.min-width-8 {
-  min-width: 8vw;
-}
-
-.min-width-10 {
-  min-width: 10vw;
-}
-
-.padding-left-1 {
-  padding-left: 1vw !important;
-}
-
-.incumbent-parent {
-  display: flex;
-  flex-flow: row;
-  justify-content: left;
-  align-items: center;
-}
-
-.incumbent {
-  margin: 0px;
-  padding: 0px;
-  border-radius: 50%;
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  color: #efefef;
-  text-align: center;
-  font-size: 12px;
-  margin-left: 6px;
-}
-
-.race-overview {
-  padding-top: 10vh;
-  display: inline-block;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.root {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-}
-
-.link-button {
-  background: none;
-  border: none;
-  padding: 0;
-  color: #5291ff;
-  cursor: pointer;
-}
-
-.prediction-section {
-  margin-bottom: 4vh;
-}
-
-button {
-  background-color: rgb(0, 115, 128);
-  border: none;
-  color: white;
-  padding: 5px;
-  cursor: pointer;
-}
-
-.race-overview > button {
-  max-width: 75px;
-}
-
-.candidate-rep:not(.incumbent) {
-  color: #ff5260;
-}
-
-.candidate-dem:not(.incumbent) {
-  color: #6eb1f5;
-}
-
-.candidate-ind:not(.incumbent) {
-  color: #ffb721;
-}
-
-.candidate-oth:not(.incumbent) {
-  color: #9a9a9a;
-}
-
-.candidate-rep .incumbent {
-  background-color: #ff5260;
-}
-
-.candidate-dem .incumbent {
-  background-color: #6eb1f5;
-}
-
-.candidate-ind .incumbent {
-  background-color: #ffb721;
-}
-
-.candidate-oth .incumbent {
-  background-color: #9a9a9a;
-}
-
-.modal-parent {
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0,0,0,0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal {
-  position: unset;
-  width: 30vw;
-  height: 40vh;
+.tooltip {
   background-color: #efefef;
+  outline-style: solid;
+  outline-width: 1px;
+  outline-color: #8c8c8c;
+  padding: 4px;
+  user-select: none;
   color: #0a0a0a;
+  overflow:visible;
 }
 
-.static-tooltip {
-  position: relative;
+.tooltip-hint {
+  font-size: 80%;
+  margin-bottom: 0px;
 }
 
-.static-tooltip .static-tooltip-contents {
-  display: none;
-  position: absolute;
-  text-align: left;
-  cursor: initial;
-}
-
-.static-tooltip:hover .static-tooltip-contents {
-  display: block;
-  min-width: 12vw;
-}
-
-.input-error {
-  color: #ff0000;
-}
-
-.avatar {
-  border-radius: 50%;
-}
-
-.ribbon-container {
-  width: 100%;
-  height: 80px;
-  border-bottom: 1px solid #c8c8c8;
+.tooltip-title {
+  margin-top: 0px;
 }
 
 .ribbon {
-  margin: 24px;
-  display: flex;
-  place-content: space-between;
-  align-items: center;
-  justify-content: middle;  
+  font-size: 14pt;
 }
 
-.ribbon-item {
-  flex: 1;
-  text-align: center;
+.ribbon .link-button {
+  font-size: 12pt;
 }
 
-.flex-4 {
-  flex: 4!important;
-}
-
-.account-section {
-  display: flex;
-  flex-direction: row;
-  justify-content: right;
-  align-items: center;
-  gap: 2%
-}
-
-.account-details-section {
-  display: inline-grid;
-}
-
-.map {
-  width: 664px;
-  height: 418px;
-}
-
-.align-right {
-  text-align: right;
+.ribbon .extra-info {
+  font-size: 10pt;
 }

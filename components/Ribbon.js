@@ -32,7 +32,7 @@ export default function Ribbon(props) {
                 <div className="ribbon-item account-section"> 
                     { user ? (
                             <>
-                                <p>{user.xp}</p>
+                                <p className="extra-info">Your balance: {user.xp}</p>
                                 <div className="account-details-section">
                                     { user.username }
                                     <button 
