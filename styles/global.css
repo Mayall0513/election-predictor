@@ -32,39 +32,39 @@ button {
 }
 
 .candidate-dem .incumbent {
-  background-color: #6eb1f5;
+  background-color: #00aef3;
 }
 
 .candidate-dem:not(.incumbent) {
-  color: #6eb1f5;
+  color: #00aef3;
 }
 
 .candidate-ind .incumbent {
-  background-color: #ffb721;
+  background-color: #dba400;
 }
 
 .candidate-ind:not(.incumbent) {
-  color: #ffb721;
+  color: #dba400;
 }
 
 .candidate-oth .incumbent {
-  background-color: #9a9a9a;
+  background-color: #848484;
 }
 
 .candidate-oth:not(.incumbent) {
-  color: #9a9a9a;
+  color: #848484;
 }
 
 .candidate-rep .incumbent {
-  background-color: #ff5260;
+  background-color: #e81b23;
 }
 
 .candidate-rep:not(.incumbent) {
-  color: #ff5260;
+  color: #e81b23;
 }
 
 .flex-4 {
-  flex: 4!important;
+  flex: 4 !important;
 }
 
 .incumbent {
