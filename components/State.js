@@ -61,7 +61,8 @@ export default function State(props) {
             const leadingCandidateParty = race.candidates[0].party || 'oth';
             const leadingCandidateColor = partyColours[leadingCandidateParty];
             const candidateLeadPercent = candidateLead / 100;
-            const { r, g, b } = lerp(leadingCandidateColor, defaultStateColor, candidateLeadPercent);           
+            const lerpPercent = Math.min(candidateLeadPercent * 2, 1);
+            const { r, g, b } = lerp(leadingCandidateColor, defaultStateColor, lerpPercent);           
 
             return (
                 <path
