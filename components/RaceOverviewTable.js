@@ -95,15 +95,8 @@ export default function RaceOverviewTable(props) {
   }
   
   let key = 0;
-  if (configuringPrediction) {
-    race.candidates = race.candidates.sort((x, y) => y.totalBet - x.totalBet);
-  }
+  race.candidates = race.candidates.sort((x, y) => y.totalBet - x.totalBet);
 
-  else {
-    race.candidates = race.candidates.sort((x, y) => y.odds - x.odds);
-  }
-  
-  
   return (
     <>
       { modalVisible &&
