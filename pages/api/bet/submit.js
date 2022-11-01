@@ -13,19 +13,20 @@ export default async (req, res) => {
     }
 
     const { predictions } = req.body;
+
     try {
         const jwtContents = jwt.verify(req.cookies[process.env.AUTH_COOKIE_NAME], process.env.JWT_SECRET);
         const experience = await getUserXp(jwtContents.id);
     
         let totalWager = 0;
         for (const race_id in predictions) {
-            totalWager += predictions[race_id];
+            totalWager += parseInt(predictions[race_id]);
         }
     
         if (totalWager > experience) {
             return res.status(400).send();
         }
-    
+
         for (const race_id in predictions) {
             const prediction = predictions[race_id];
             if (!prediction || prediction === '') {
