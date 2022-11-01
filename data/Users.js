@@ -34,12 +34,13 @@ const cacheUserXp = async (userId) => {
     let page = 0;
 
     while (true) {
-      const users = await axios.get(`${process.env.MEE6_ENDPOINT}/${process.env.SERVER_ID}?limit=${pageSize}&page=${page}`);
-  
+      const usersResponse = await axios.get(`${process.env.MEE6_ENDPOINT}/${process.env.SERVER_ID}?limit=${pageSize}&page=${page}`);
+      const { players } = usersResponse.data;
+
       let experience = null;
       let query = ``;
-  
-      for (const user of users.data.players) {
+
+      if (players.length === 0) {
         query += `
           insert into 
             users
@@ -49,20 +50,41 @@ const cacheUserXp = async (userId) => {
             )
           values
             (
-              ${user.id},
-              ${user.xp}
+              ${userId},
+              0
             )
           on conflict(user_id) do update
-            set experience=${user.xp};
+            set experience=0;
+        `
+        experience = 0;
+      }
+  
+      for (const user of players) {
+        const { id, xp } = user;
+        
+        query += `
+          insert into 
+            users
+            (
+              user_id,
+              experience
+            )
+          values
+            (
+              ${id},
+              ${xp}
+            )
+          on conflict(user_id) do update
+            set experience=${xp};
         `;
   
-        if (user.id == userId) {
-          experience = user.xp;
+        if (id == userId) {
+          experience = xp;
         }
       }
   
       await databasePool.query(query);
-      if (experience) {
+      if (experience !== null) {
         return experience;
       }
   

@@ -89,19 +89,28 @@ body {
   padding-left: 1vw !important;
 }
 
+.incumbent-parent {
+  display: flex;
+  flex-flow: row;
+  justify-content: left;
+  align-items: center;
+}
+
 .incumbent {
+  margin: 0px;
+  padding: 0px;
   border-radius: 50%;
   display: inline-block;
   width: 14px;
   height: 14px;
   color: #efefef;
   text-align: center;
-  vertical-align: text-bottom;
   font-size: 12px;
   margin-left: 6px;
 }
 
 .race-overview {
+  padding-top: 10vh;
   display: inline-block;
   flex-grow: 1;
   display: flex;
@@ -199,11 +208,9 @@ button {
 
 .static-tooltip .static-tooltip-contents {
   display: none;
-
   position: absolute;
   text-align: left;
-  
-  cursor:initial;
+  cursor: initial;
 }
 
 .static-tooltip:hover .static-tooltip-contents {
@@ -255,8 +262,8 @@ button {
 }
 
 .map {
-  min-width: 728px;
-  min-height: 456px;
+  width: 664px;
+  height: 418px;
 }
 
 .align-right {

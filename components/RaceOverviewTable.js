@@ -151,7 +151,7 @@ export default function RaceOverviewTable(props) {
 
             return (
               <tr key={++key} className={party}>
-                <td>
+                <td className="incumbent-parent">
                   <span>{candidate.name}</span>
                   { candidate.incumbent && (
                     <span className="incumbent">i</span>
