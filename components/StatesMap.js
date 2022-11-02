@@ -63,8 +63,6 @@ export default function StatesMap(props) {
                 <svg 
                     width="604"
                     height="380"
-                    transform="scale(1.1)"
-                    transform-origin="0 0"
                     className="map"
                     onMouseOut={removeHoveredState}
                 >

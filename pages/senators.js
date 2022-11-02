@@ -33,7 +33,7 @@ export default function Senators(props) {
     return (
       <>
           <Ribbon user={user}/>
-          <div className="root">
+          <div className="page-content">
                 <StatesMap
                     states={states}
                     onRaceSelected={onRaceSelected}
