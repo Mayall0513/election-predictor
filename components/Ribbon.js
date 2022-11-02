@@ -15,17 +15,13 @@ export default function Ribbon(props) {
                     <button 
                         type="button" 
                         className="link-button"
-                        onClick={(e) => {
-                            router.replace("/governors", undefined, { shallow: true });
-                        }}>
+                        onClick={(e) => router.replace("/governors", undefined, { shallow: true }) }>
                         Gubernatorial races
                     </button>
                     <button 
                         type="button" 
                         className="link-button padding-left-1"
-                        onClick={(e) => {
-                            router.replace("/senators", undefined, { shallow: true });
-                        }}>
+                        onClick={(e) => router.replace("/senators", undefined, { shallow: true }) }>
                         Senate races
                     </button>
                 </div>

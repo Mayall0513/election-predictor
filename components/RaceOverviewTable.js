@@ -90,6 +90,8 @@ export default function RaceOverviewTable(props) {
 
     router.reload();
   }
+
+  let key = 0;
   
   return (
     <>
@@ -151,7 +153,7 @@ export default function RaceOverviewTable(props) {
             const candidateOdds = candidate.odds === 0 ? '<0.1' : candidate.odds;
 
             return (
-              <tr key={i} className={party}>
+              <tr key={++key} className={party}>
                 <td className="incumbent-parent">
                   <span>{candidate.name}</span>
                   { candidate.incumbent && 
