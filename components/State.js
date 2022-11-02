@@ -32,9 +32,18 @@ export default function State(props) {
 
     else {
         const race = races[0];
-        const candidateLead = race.candidates[0].odds - races[0].candidates[1].odds;
-
+        const { odds, party } = race.candidates[0];
         const className = "state " + (focused ? "state-focused" : "");
+        let candidateLead = null;
+
+        for (let i = 1; i < race.candidates.length; i++) {
+            const secondRace = race.candidates[i];
+
+            if (party !== secondRace.party) {
+                candidateLead = parseInt(odds) - parseInt(secondRace.odds);
+                break;
+            }
+        }
 
         if (candidateLead < 0.5) {
             return (
