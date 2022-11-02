@@ -8,8 +8,7 @@ export default function StaticTooltip(props) {
                 <div className="tooltip static-tooltip-contents ">
                     {contents}
                 </div>
-            </button>
-            
+            </button>  
         </>
     );
 };

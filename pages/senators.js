@@ -22,12 +22,12 @@ export default function Senators(props) {
         const { stateId, raceId } = e;
 
         setFocusedRace({ state: stateId, race: states[stateId].races[raceId] });
-        router.push(`/senators?s=${stateId}&r=${raceId}`);
+        router.replace(`/senators?s=${stateId}&r=${raceId}`, undefined, { shallow: true });
     };
 
     const removeSelectedState = () => {
         setFocusedRace({ state: null, race: null });
-        router.push(`/senators`);
+        router.replace('/senators', undefined, { shallow: true });
     };
 
     return (

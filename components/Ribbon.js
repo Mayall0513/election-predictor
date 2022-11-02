@@ -16,7 +16,7 @@ export default function Ribbon(props) {
                         type="button" 
                         className="link-button"
                         onClick={(e) => {
-                            router.push("/governors");
+                            router.replace("/governors", undefined, { shallow: true });
                         }}>
                         Gubernatorial races
                     </button>
@@ -24,7 +24,7 @@ export default function Ribbon(props) {
                         type="button" 
                         className="link-button padding-left-1"
                         onClick={(e) => {
-                            router.push("/senators");
+                            router.replace("/senators", undefined, { shallow: true });
                         }}>
                         Senate races
                     </button>
@@ -39,7 +39,7 @@ export default function Ribbon(props) {
                                         type="button" 
                                         className="link-button"
                                         onClick={(e) => {
-                                            router.push("/api/auth/signout");
+                                            router.replace("/api/auth/signout", undefined, { shallow: true });
                                         }}>
                                         Sign out
                                     </button>
@@ -52,7 +52,7 @@ export default function Ribbon(props) {
                                 type="button" 
                                 className="link-button"
                                 onClick={(e) => {
-                                    router.push("/api/auth/signin");
+                                    router.replace("/api/auth/signin", undefined, { shallow: true });
                                 }}>
                                 Sign in
                             </button>

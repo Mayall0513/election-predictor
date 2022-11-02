@@ -18,7 +18,6 @@ const lerp = (first, second, percent) => {
     }
 };
 
-
 export default function State(props) {
     const { races, stateId, focused, onClicked, mouseEntered } = props;
 
