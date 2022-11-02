@@ -37,22 +37,14 @@ export default function State(props) {
 
         const className = "state " + (focused ? "state-focused" : "");
 
-        if (candidateLead < 1) {
+        if (candidateLead < 2) {
             return (
                 <path
                     className={className}
                     fill="#dadada"
                     d={statePaths[stateId]}
-                    onClick={(e) => { 
-                        if (onClicked) {
-                            onClicked({ stateId, raceId: 0, event: e }); 
-                        }
-                    }}
-                    onMouseEnter={(e) => { 
-                        if (mouseEntered) {
-                            mouseEntered({ stateId, raceId: 0, event: e });
-                        }
-                    }}
+                    onMouseUp={(e) => onClicked({ stateId, raceId: 0, event: e }) }
+                    onMouseEnter={(e) => mouseEntered({ stateId, raceId: 0, event: e }) }
                 />
             );
         }
@@ -60,25 +52,17 @@ export default function State(props) {
         else {
             const leadingCandidateParty = race.candidates[0].party || 'oth';
             const leadingCandidateColor = partyColours[leadingCandidateParty];
-            const candidateLeadPercent = candidateLead / 100;
+            const candidateLeadPercent = (candidateLead - 2) / 100;
             const lerpPercent = Math.min(candidateLeadPercent * 2, 1);
             const { r, g, b } = lerp(leadingCandidateColor, defaultStateColor, lerpPercent);           
 
             return (
                 <path
                     className={className}
-                    fill={`rgb(${r}, ${g}, ${b})`}
+                    fill={`rgb(${Math.floor(r)}, ${Math.floor(g)}, ${Math.floor(b)})`}
                     d={statePaths[stateId]}
-                    onClick={(e) => { 
-                        if (onClicked) {
-                            onClicked({ stateId, raceId: 0, event: e }); 
-                        }
-                    }}
-                    onMouseEnter={(e) => { 
-                        if (mouseEntered) {
-                            mouseEntered({ stateId, raceId: 0, event: e });
-                        }
-                    }}
+                    onClick={(e) => onClicked({ stateId, raceId: 0, event: e }) }
+                    onMouseEnter={(e) => mouseEntered({ stateId, raceId: 0, event: e }) }
                 />
             );
         }

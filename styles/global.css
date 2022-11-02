@@ -151,7 +151,9 @@ button {
 }
 
 .race-overview > button {
-  max-width: 75px;
+  min-width: 75px;
+  width: 5vw;
+  max-width: 85px;
 }
 
 .race-overview {
@@ -161,6 +163,7 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 40vw;
 }
 
 .ribbon {
@@ -185,7 +188,7 @@ button {
 .root {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
