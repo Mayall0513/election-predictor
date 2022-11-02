@@ -62,6 +62,7 @@ export default function RaceOverviewTable(props) {
   };
 
   const onCancelPrediction = (e) => {
+    setValidationError(null);
     setConfiguringPrediction(false);
   };
 
@@ -178,18 +179,18 @@ export default function RaceOverviewTable(props) {
           })}
         </tbody>
       </table>
-      { allowPredictions && (
-        configuringPrediction ?
-          <>
-            { validationError && <p className="input-error">{validationError}</p> }
-            <div>
+      <div className="align-left">
+        { validationError && <p className="input-error">{validationError}</p> }
+        { allowPredictions && (
+          configuringPrediction ?
+            <>
               <button type="button" className="link-button" onClick={onMakePrediction}>Submit prediction</button>
               <button type="button" className="padding-left-1 link-button" onClick={onCancelPrediction}>Cancel</button>
-            </div>
-          </> :
-          <button type="button" className="link-button" onClick={onStartPrediction}>Make a prediction</button>
-        )
-      }
+            </> :
+            <button type="button" className="link-button" onClick={onStartPrediction}>Make a prediction</button>
+          )
+        }
+      </div>
     </>
   );
 };
