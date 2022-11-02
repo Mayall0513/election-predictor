@@ -2,13 +2,11 @@ export default function StaticTooltip(props) {
     const { contents } = props;
 
     return (
-        <>
-            <button type="button" className="link-button static-tooltip">
-                (?)
-                <div className="tooltip static-tooltip-contents ">
-                    {contents}
-                </div>
-            </button>  
-        </>
+        <button type="button" className="link-button static-tooltip">
+            (?)
+            <div className="tooltip static-tooltip-contents ">
+                {contents}
+            </div>
+        </button>
     );
 };

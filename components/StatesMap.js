@@ -7,8 +7,6 @@ import Tooltip from './StateTooltip';
 import { ids as stateIds } from '../data/States';
 import { translations } from "../data/States";
 
-
-
 export default function StatesMap(props) {
     const { states, onRaceSelected, focusedRace } = props;
     const [ hoveredRace, setHoveredRace ] = useState({ state: null, race: null });
@@ -49,11 +47,7 @@ export default function StatesMap(props) {
                 races={races}
                 stateId={stateId}
                 focused={focused}
-                onClicked={(e) => {
-                    if (onRaceSelected) {
-                        onRaceSelected(e);
-                    }
-                }}
+                onClicked={(e) => onRaceSelected(e)}
                 mouseEntered={onMouseEnterState}
             />
         );
@@ -63,8 +57,8 @@ export default function StatesMap(props) {
         <>
             <div className="map-parent">
                 <svg 
-                    viewBox="0 0 604 380"
                     className="map"
+                    viewBox="0 0 604 380"
                     onMouseOut={removeHoveredState}
                 >
                     {stateDrawBatches}

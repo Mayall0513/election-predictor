@@ -38,7 +38,7 @@ const cacheUserXp = async (userId) => {
       const { players } = usersResponse.data;
 
       let experience = null;
-      let query = ``;
+      let query = '';
 
       if (players.length === 0) {
         query += `

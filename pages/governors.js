@@ -3,10 +3,12 @@ import { useRouter } from "next/router";
 
 import axios from 'axios';
 
+import { getSignedInUser } from '../data/Users';
+
 import PredictionPanel from "../components/PredictionPanel";
 import StatesMap from "../components/StatesMap";
 import Ribbon from "../components/Ribbon";
-import { getSignedInUser } from '../data/Users';
+
 
 export default function Governors(props) {
     const { user, states, defaultFocusedState, defaultFocusedRaceIndex } = props;

@@ -35,7 +35,7 @@ export default function StateTooltip(props) {
                 verboseOdds={false}
                 allowPredictions={false}
             />
-            <span className="tooltip-hint">Click for more information</span>
+            <span className="tooltip-hint">Click the state to make a prediction</span>
         </div>
     )
 };

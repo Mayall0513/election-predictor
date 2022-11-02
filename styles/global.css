@@ -73,7 +73,7 @@ button {
 }
 
 .flex-4 {
-  flex: 4!important;
+  flex: 4 !important;
 }
 
 .incumbent {
@@ -179,15 +179,11 @@ button {
 .ribbon {
   margin: 1vh 1vw 1vh 1vw;
   display: flex;
-  place-content: space-between;
   align-items: center;
-  font-size: 14pt;
 }
 
 .ribbon-container {
   width: 100%;
-  height: 10vh;
-  margin: 0px;
   border-bottom: 1px solid #c8c8c8;
 }
 

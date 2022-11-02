@@ -9,9 +9,9 @@ export default function Ribbon(props) {
         <div className="ribbon-container">
             <div className="ribbon">
                 <div className="ribbon-item">
-                    {"<put website name here>"}
+                    {"<website name here>"}
                 </div>
-                <div className="ribbon-item flex-4 ">
+                <div className="ribbon-item flex-4">
                     <button 
                         type="button" 
                         className="link-button"
@@ -30,33 +30,30 @@ export default function Ribbon(props) {
                     </button>
                 </div>
                 <div className="ribbon-item account-section"> 
-                    { user ? (
-                            <>
-                                <p className="extra-info">Your balance: {user.xp}</p>
-                                <div className="account-details-section">
-                                    { user.username }
-                                    <button 
-                                        type="button" 
-                                        className="link-button"
-                                        onClick={(e) => {
-                                            router.replace("/api/auth/signout", undefined, { shallow: true });
-                                        }}>
-                                        Sign out
-                                    </button>
-                                </div>
-                                
-                                <img className="avatar" width="64" height="64" src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}?size=80`}/>
-                            </>
-                        ) : (
-                            <button 
-                                type="button" 
-                                className="link-button"
-                                onClick={(e) => {
-                                    router.replace("/api/auth/signin", undefined, { shallow: true });
-                                }}>
-                                Sign in
-                            </button>
-                        )
+                    { user ?
+                        <>
+                            <p className="extra-info">Balance: {user.xp}</p>
+                            <div className="account-details-section">
+                                { user.username }
+                                <button 
+                                    type="button" 
+                                    className="link-button"
+                                    onClick={(e) => {
+                                        router.replace("/api/auth/signout", undefined, { shallow: true });
+                                    }}>
+                                    Sign out
+                                </button>
+                            </div>
+                            <img className="avatar" width="64" height="64" src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}?size=80`}/>
+                        </> :
+                        <button 
+                            type="button" 
+                            className="link-button"
+                            onClick={(e) => {
+                                router.replace("/api/auth/signin", undefined, { shallow: true });
+                            }}>
+                            Sign in
+                        </button>
                     }
                 </div>
             </div>

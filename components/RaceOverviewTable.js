@@ -25,33 +25,29 @@ export default function RaceOverviewTable(props) {
   const onMakePrediction = (e) => {
     const predictionValues = Object.values(predictions);
     if (!predictionValues.some(x => x !== '0' && x !== '')) {
-      setValidationError("Please make a prediction");
-      return;
+      return setValidationError("Please make a wager!");
     }
 
-    let wagerTotal = 0;
-
+    let newWagerTotal = 0;
     for (const predictionValue of predictionValues) {
       try {
-        wagerTotal += parseInt(predictionValue);
+        newWagerTotal += parseInt(predictionValue);
       }
       
       catch(error) {
-        setValidationError(`${predictionValues} is not a number!`);
-        return;
+        return setValidationError(`${predictionValues} is not a number!`);
       }
     }
 
-    if (wagerTotal > user.xp) {
-      setValidationError('You do not have enough xp to make this wager!');
-      return;
+    if (newWagerTotal > user.xp) {
+      return setValidationError('You do not have enough xp to make this wager!');
     }
 
     if (validationError) {
       setValidationError(null);
     }
 
-    setWagerTotal(wagerTotal);
+    setWagerTotal(newWagerTotal);
     setModalVisible(true);
   }
 
@@ -62,15 +58,13 @@ export default function RaceOverviewTable(props) {
   };
 
   const onCancelPrediction = (e) => {
-    setValidationError(null);
     setConfiguringPrediction(false);
   };
 
   const onPredictionEdited = (e) => {
     const { candidate } = e;
-    const { value } = e.event.target;
+    const newPrediction = e.event.target.replace(wagerRegex, "");
 
-    const newPrediction = value.replace(wagerRegex, "");
     if (newPrediction != predictions[candidate.raceId]) {
       const newPredictions = { ...predictions };
       newPredictions[candidate.raceId] = newPrediction;
@@ -97,7 +91,6 @@ export default function RaceOverviewTable(props) {
     router.reload();
   }
   
-  let key = 0;
   return (
     <>
       { modalVisible &&
@@ -111,7 +104,6 @@ export default function RaceOverviewTable(props) {
                       <button type="button" className="margin-left-1" onClick={() => setModalVisible(false)}>Cancel</button>
                   </span>
                 </div>
-
             </div>
         </div>
       }
@@ -119,7 +111,7 @@ export default function RaceOverviewTable(props) {
         <thead className="align-left">
           <tr>
             <th className={wide ? "min-width-10" : "min-width-8"}>Candidate</th>
-            { verboseOdds && (
+            { verboseOdds && 
                 <th>
                   <span>Odds </span>
                   <StaticTooltip 
@@ -139,48 +131,57 @@ export default function RaceOverviewTable(props) {
                     }
                   />
               </th>
-            )}
-            { !verboseOdds && <th>Odds</th>}
-            { allowPredictions && <th className="padding-left-1">Total Wagered</th>}
-            { configuringPrediction && (
+            }
+            { !verboseOdds && 
+              <th>Odds</th>
+            }
+            { allowPredictions && 
+              <th className="padding-left-1">Total Wagered</th>
+            }
+            { configuringPrediction && 
               <th className="padding-left-1">
                 <span>Your Wager</span>
               </th>
-            )}
+            }
           </tr>
         </thead>
         <tbody>
           { race.candidates.map((candidate, i) => {
             const party = ['rep', 'dem', 'ind'].includes(candidate.party) ? 'candidate-' + candidate.party : 'candidate-oth';
+            const candidateOdds = candidate.odds === 0 ? '<0.1' : candidate.odds;
 
             return (
-              <tr key={++key} className={party}>
+              <tr key={i} className={party}>
                 <td className="incumbent-parent">
                   <span>{candidate.name}</span>
-                  { candidate.incumbent && (
+                  { candidate.incumbent && 
                     <span className="incumbent">i</span>
-                  )}
+                  }
                 </td>
-                <td className="align-right">{candidate.odds === 0 ? '<0.1' : candidate.odds}</td>
-                { allowPredictions && <td className="align-right">{candidate.totalBet}</td>}
-                { configuringPrediction && (
+                <td className="align-right">{candidateOdds}</td>
+                { allowPredictions && 
+                  <td className="align-right">{candidate.totalBet}</td>
+                }
+                { configuringPrediction &&
                   <td className="align-right">
                     <input
                       type="text"
                       className={"table-text-input " + (validationError ? "table-text-input-error" : "")}
-                      value={predictions[candidate.raceId] ? predictions[candidate.raceId] : ""}
+                      value={predictions[candidate.raceId] || ""}
                       placeholder="0"
                       onChange={(e) => onPredictionEdited({ candidate, event: e })}
                     />
                   </td>
-                )}
+                }
               </tr>
             );
           })}
         </tbody>
       </table>
       <div className="align-left">
-        { validationError && <p className="input-error">{validationError}</p> }
+        { validationError && 
+          <p className="input-error">{validationError}</p>
+        }
         { allowPredictions && (
           configuringPrediction ?
             <>
