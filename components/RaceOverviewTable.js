@@ -64,9 +64,7 @@ export default function RaceOverviewTable(props) {
   const onPredictionEdited = (e) => {
     const { candidate } = e;
     const newPrediction = e.event.target.value.replace(wagerRegex, "");
-
-    console.log(newPrediction);
-
+    
     if (newPrediction != predictions[candidate.raceId]) {
       const newPredictions = { ...predictions };
       newPredictions[candidate.raceId] = newPrediction;
