@@ -59,16 +59,19 @@ export default function StatesMap(props) {
 
     return (
         <>
-            <svg 
-                width="604"
-                height="380"
-                transform="scale(1.1)"
-                transform-origin="0 0"
-                className="map"
-                onMouseOut={removeHoveredState}
-            >
-                {stateDrawBatches}
-            </svg>
+            <div className="map-parent">
+                <svg 
+                    width="604"
+                    height="380"
+                    transform="scale(1.1)"
+                    transform-origin="0 0"
+                    className="map"
+                    onMouseOut={removeHoveredState}
+                >
+                    {stateDrawBatches}
+                </svg>
+            </div>
+  
             { hoveredRace.race != null && hoveredRace.state != null &&
                 <Tooltip
                     race={hoveredRace.race}
