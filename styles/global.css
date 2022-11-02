@@ -111,6 +111,9 @@ button {
 .map-parent {
   min-width: 604px;
   min-height: 380px;
+  flex-grow: 0.4;
+  margin-left: 1vw;
+  margin-right: 1vw;
 }
 
 .min-width-10 {
@@ -169,9 +172,9 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex-grow: 1;
-  min-width: 40vw;
+  flex-grow: 0.4;
   padding-top: 10vh;
+  min-width: 50vw;
 }
 
 .ribbon {

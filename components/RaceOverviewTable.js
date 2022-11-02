@@ -47,8 +47,6 @@ export default function RaceOverviewTable(props) {
       return;
     }
 
-    
-
     if (validationError) {
       setValidationError(null);
     }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { isBrowser } from 'react-device-detect';
 
 import State from './State';
 import Tooltip from './StateTooltip';
@@ -6,9 +7,10 @@ import Tooltip from './StateTooltip';
 import { ids as stateIds } from '../data/States';
 import { translations } from "../data/States";
 
+
+
 export default function StatesMap(props) {
     const { states, onRaceSelected, focusedRace } = props;
-
     const [ hoveredRace, setHoveredRace ] = useState({ state: null, race: null });
 
     const onMouseEnterState = (e) => {
@@ -61,8 +63,7 @@ export default function StatesMap(props) {
         <>
             <div className="map-parent">
                 <svg 
-                    width="604"
-                    height="380"
+                    viewBox="0 0 604 380"
                     className="map"
                     onMouseOut={removeHoveredState}
                 >
@@ -70,7 +71,7 @@ export default function StatesMap(props) {
                 </svg>
             </div>
   
-            { hoveredRace.race != null && hoveredRace.state != null &&
+            { isBrowser && hoveredRace.race != null && hoveredRace.state != null &&
                 <Tooltip
                     race={hoveredRace.race}
                     stateName={translations[hoveredRace.state]}
