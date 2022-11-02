@@ -11,17 +11,6 @@ create table races (
 
 -- Governor races
 
--- Washington
-
-insert into races(race_type, race_index, state_id, candidate_name, candidate_party, incumbent)
-values (0, 0, 'wa', 'Patty Murray', 'dem', true);
-
-insert into races(race_type, race_index, state_id, candidate_name, candidate_party, incumbent)
-values (0, 0, 'wa', 'Tiffany Smiley', 'rep', false);
-
-insert into races(race_type, race_index, state_id, candidate_name, candidate_party, incumbent)
-values (0, 0, 'wa', 'Other candidate', 'oth', false);
-
 -- Oregon
 
 insert into races(race_type, race_index, state_id, candidate_name, candidate_party, incumbent)
