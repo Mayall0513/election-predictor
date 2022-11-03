@@ -113,7 +113,7 @@ export default function RaceOverviewTable(props) {
       <table className="table">
         <thead className="align-left">
           <tr>
-            <th className={wide ? "min-width-10" : "min-width-8"}>Candidate</th>
+            <th className={wide ? "min-width-12" : "min-width-8"}>Candidate</th>
             { verboseOdds && 
                 <th>
                   <span>Odds </span>

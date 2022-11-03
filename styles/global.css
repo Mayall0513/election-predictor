@@ -116,16 +116,16 @@ button {
   margin-right: 1vw;
 }
 
-.min-width-10 {
-  min-width: max(20px, 10vw);
-}
-
 .min-width-4 {
   min-width: max(8px, 4vw);
 }
 
 .min-width-8 {
   min-width: max(16px, 8vw);
+}
+
+.min-width-12 {
+  min-width: max(24px, 12vw);
 }
 
 .modal {
