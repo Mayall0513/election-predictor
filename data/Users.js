@@ -4,8 +4,21 @@ import axios from 'axios';
 
 import jwt from 'jsonwebtoken';
 
+const maximumLevel = 100;
+const levels = [];
+
+{
+  let runningXp = 0;
+
+  for (let i = 0; i < maximumLevel; i++) {
+    levels[i] = runningXp;
+    runningXp += 5 * (i * i) + (50 * i) + 100;
+  }
+}
+
+
 const pageSize = 1000;
-const maximumXp = 3000;
+const maximumXp = levels[14];
 
 const getUserXp = async (userId) => {
     const userRows = await databasePool.query(`
