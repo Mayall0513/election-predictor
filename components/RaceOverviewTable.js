@@ -101,7 +101,7 @@ export default function RaceOverviewTable(props) {
                 <h2>Are you sure?</h2>
                 <div className="align-left">
                   <p>This will cost you {wagerTotal} experience and cannot be undone!</p>
-                  <p>Experience will not be subtracted from your account until after races have been<br/>called, it will be subtracted from your running balance in the top right, though.</p>  
+                  <p>Experience will not be subtracted from your Discord account until after races have<br/>been called, it will be subtracted from your running balance in the top right, though.</p>  
                   <span>
                       <button type="button" onClick={onSubmitPrediction}>Yes</button>
                       <button type="button" className="margin-left-1" onClick={() => setModalVisible(false)}>Cancel</button>
