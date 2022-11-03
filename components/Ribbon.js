@@ -8,8 +8,8 @@ export default function Ribbon(props) {
     return (
         <div className="ribbon-container">
             <div className="ribbon">
-                <div className="ribbon-item">
-                    {"<website name here>"}
+                <div className="ribbon-item align-left">
+                    <img className="avatar" width="64" height="64" src="https://cdn.discordapp.com/icons/699754090674257921/a_cd3f10d33a31ff03e294f186cf424f0c.gif?size=80"/>
                 </div>
                 <div className="ribbon-item flex-4">
                     <button 

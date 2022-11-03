@@ -5,6 +5,7 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 
 const pageSize = 1000;
+const maximumXp = 3000;
 
 const getUserXp = async (userId) => {
     const userRows = await databasePool.query(`
@@ -24,10 +25,11 @@ const getUserXp = async (userId) => {
       xpWagered += parseInt(userbet.bet_amount);
     }
     
-    return parseInt(userRows.rows.length === 0 ?
-        await cacheUserXp(userId) :
-        userRows.rows[0].experience
-    ) - xpWagered;
+    const userXp = parseInt(userRows.rows.length === 0 ? 
+      await cacheUserXp(userId) : 
+      userRows.rows[0].experience);
+
+    return Math.min(userXp, maximumXp) - xpWagered;
 };
 
 const cacheUserXp = async (userId) => {
