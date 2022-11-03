@@ -120,13 +120,13 @@ export default function RaceOverviewTable(props) {
                   <StaticTooltip 
                     contents={
                       <>
-                        The chance that this candidate will win the race
+                        The chance that this candidate will win the race.
 
                         <p>
-                          Based on the percentage of all wagers made on this race that were made towards this candidate winning  
+                          Based on the percentage of all wagers made on this race that were made towards this candidate winning.
                         </p>
                         <p>
-                          Winnings are scaled proportionately against odds. With less likely outcomes rewarding larger payouts
+                          Winnings are scaled proportionately against odds. With less likely outcomes rewarding larger payouts.
                         </p>
 
                         If your prediction is incorrect, you lose your wager.
