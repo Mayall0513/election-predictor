@@ -159,7 +159,10 @@ button {
 }
 
 .prediction-section {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 4vh;
+  align-items: center;
 }
 
 .race-overview > button {
@@ -177,14 +180,16 @@ button {
 }
 
 .ribbon {
-  margin: 1vh 1vw 1vh 1vw;
+  margin: 1vh 1vw 0 1vw;
+  padding: 0 0 1vh 0;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid #c8c8c8;
 }
 
 .ribbon-container {
   width: 100%;
-  border-bottom: 1px solid #c8c8c8;
+  margin-bottom: 4vh;
 }
 
 .ribbon-item {
