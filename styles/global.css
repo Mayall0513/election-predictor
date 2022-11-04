@@ -294,3 +294,13 @@ button {
 .ribbon .extra-info {
   font-size: 12pt;
 }
+
+.prediction-section-title {
+  font-size: 18pt;
+  color: #e2e2e2;
+}
+
+.prediction-section-state-name {
+  color: #f8f8f8;
+  font-weight: bolder;
+}

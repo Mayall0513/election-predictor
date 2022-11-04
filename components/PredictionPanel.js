@@ -24,7 +24,12 @@ export default function PredictionPanel(props) {
             { showingRace &&
                 <>
                     <div className="prediction-section">
-                        <h2>The {translations[focusedRace.state]} {focusedRace.race.raceType === 0 ? "gubernatorial" : "senate"} race</h2>
+                        <h3 className="prediction-section-title">The 
+                            <b className="prediction-section-state-name">
+                                {" " + translations[focusedRace.state] + " "} 
+                            </b> 
+                            {focusedRace.race.raceType === 0 ? "gubernatorial" : "senate"} race
+                        </h3>
                         <RaceOverviewTable
                             user={user}
                             race={focusedRace.race}
