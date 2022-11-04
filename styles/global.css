@@ -162,7 +162,7 @@ button {
   display: flex;
   flex-direction: column;
   margin-bottom: 4vh;
-  align-items: center;
+  align-items: stretch;
 }
 
 .race-overview > button {
