@@ -10,6 +10,8 @@ const tokenConfig = {
     }
 };
 
+const accountAgeMinimum = new Date('2022/11/01 23:59:59');
+
 export default async (req, res) => {
     if (req.query.code) {
         try {
@@ -43,14 +45,17 @@ export default async (req, res) => {
 
             const userResponse = await axios.get(process.env.DISCORD_API_URI + "/users/@me", userConfig);
             const { id , username, avatar } = userResponse.data;
-            const jwtContents = { 
-                id, 
-                username, 
-                avatar 
-            };
-    
+
+            const timestampNum = parseInt(BigInt(id) >> 22n) + 1_420_070_400_000;
+            const timestampDate = new Date(timestampNum);
+
             const token = jwt.sign(
-                jwtContents,
+                { 
+                    id, 
+                    username, 
+                    avatar, 
+                    old: timestampDate < accountAgeMinimum 
+                },
                 process.env.JWT_SECRET,
                 { expiresIn: "24h" }
             );

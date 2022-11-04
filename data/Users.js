@@ -4,23 +4,9 @@ import axios from 'axios';
 
 import jwt from 'jsonwebtoken';
 
-const maximumLevel = 100;
-const levels = [];
-
-{
-  let runningXp = 0;
-
-  for (let i = 0; i < maximumLevel; i++) {
-    levels[i] = runningXp;
-    runningXp += 5 * (i * i) + (50 * i) + 100;
-  }
-}
-
-
 const pageSize = 1000;
-const maximumXp = levels[14];
 
-const getUserXp = async (userId) => {
+const getUserXp = async (userId, oldAccount) => {
     const userRows = await databasePool.query(`
         select experience
         from users 
@@ -42,7 +28,9 @@ const getUserXp = async (userId) => {
       await cacheUserXp(userId) : 
       userRows.rows[0].experience);
 
-    return Math.min(userXp, maximumXp) - xpWagered;
+    // 255 xp is level 3
+    // 3720 xp is level 10
+    return Math.max(Math.min(userXp, oldAccount ? 240 : 0), 4000) - xpWagered;
 };
 
 const cacheUserXp = async (userId) => {
@@ -110,8 +98,8 @@ const cacheUserXp = async (userId) => {
 const getSignedInUser = async (req) => {
   if (req.cookies[process.env.AUTH_COOKIE_NAME]) {
     try {
-        const { id, username, avatar } = jwt.verify(req.cookies[process.env.AUTH_COOKIE_NAME], process.env.JWT_SECRET);
-        const xp = await getUserXp(id);
+        const { id, username, avatar, old } = jwt.verify(req.cookies[process.env.AUTH_COOKIE_NAME], process.env.JWT_SECRET);
+        const xp = await getUserXp(id, old);
 
         return { 
           id, 
