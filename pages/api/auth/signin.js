@@ -15,7 +15,7 @@ const accountAgeMinimum = new Date('2022/11/01 23:59:59');
 export default async (req, res) => {
     if (req.query.code) {
         try {
-            const body = new URLSearchParams({
+            const searchParams = new URLSearchParams({
                 client_id: process.env.DISCORD_CLIENT_ID,
                 client_secret: process.env.DISCORD_CLIENT_SECRET,
                 grant_type: 'authorization_code',
@@ -24,7 +24,7 @@ export default async (req, res) => {
                 scope: 'identify guilds'
             });
     
-            const tokenResponse = await axios.post(process.env.DISCORD_API_URI + "/oauth2/token", body.toString(), tokenConfig);
+            const tokenResponse = await axios.post(process.env.DISCORD_API_URI + "/oauth2/token", searchParams.toString(), tokenConfig);
             const { token_type, access_token } = tokenResponse.data;
 
             const userConfig = {

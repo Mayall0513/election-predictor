@@ -30,7 +30,15 @@ const getUserXp = async (userId, oldAccount) => {
 
     // 255 xp is level 3
     // 3720 xp is level 10
-    return Math.max(Math.min(userXp, oldAccount ? 240 : 0), 4000) - xpWagered;
+    return Math.max(
+      Math.min(
+        userXp, // actual user xp
+        oldAccount ? // if they have an "old" account they get a floor of 240, otherwise there is no floor
+          240 : 
+          0
+        ), 
+      4000 // ceiling
+    ) - xpWagered; //subtract the xp they've already used
 };
 
 const cacheUserXp = async (userId) => {

@@ -84,6 +84,7 @@ export default async (req, res) => {
         returnString += `${id},${winnings}\n`;
     }
 
+    res.setHeader("Content-Typpe", "text/csv"); 
     res.status(200).send(returnString);
 }
 

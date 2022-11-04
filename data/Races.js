@@ -18,9 +18,7 @@ const getRaces = async (raceType) => {
   const stateRaceCounts = {};
   const betTotals = await getRaceBetTotals(raceType);
 
-  for (const row of response.rows) {
-    const { state_id, race_index } = row;
-
+  for (const { state_id, race_index } of response.rows) {
     if (!stateRaceCounts[state_id]) {
       stateRaceCounts[state_id] = {};
     }
@@ -34,8 +32,7 @@ const getRaces = async (raceType) => {
 
   const returnArray = {};
 
-  for (const row of response.rows) {
-    const { race_id, race_index, state_id, candidate_name, candidate_party, incumbent } = row;
+  for (const { race_id, race_index, state_id, candidate_name, candidate_party, incumbent } of response.rows) {
     if (!returnArray[state_id]) {
       returnArray[state_id] = {
         races: []
@@ -66,7 +63,7 @@ const getRaces = async (raceType) => {
       delete newCandidate.party;
     }
 
-    returnArray[state_id]['races'][race_index].candidates.push(newCandidate);
+    returnArray[state_id].races[race_index].candidates.push(newCandidate);
   }
 
   return returnArray;
@@ -82,7 +79,6 @@ const getCandidateBetInfo = (race_id, race_index, state_id, betTotals, stateRace
       0;
 
     const raceTotal = betTotals[state_id][race_index].total;
-
     return { total: betTotal, percent: betTotal / raceTotal };
   }
 
@@ -112,8 +108,7 @@ const getRaceBetTotals = async (raceType) => {
       races.race_type=${raceType}
   `);
 
-  for (const relevantBet of relevantBets.rows) {
-    const { race_id, state_id, race_index, bet_amount } = relevantBet;
+  for (const { race_id, state_id, race_index, bet_amount } of relevantBets.rows) {
     if (!betTotals[state_id]) {
       betTotals[state_id] = {};
     }
