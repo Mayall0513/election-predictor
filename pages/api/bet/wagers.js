@@ -38,7 +38,7 @@ export default async (req, res) => {
             };
         }
 
-        if (!states[state_id].races[race_id][user_id]) {
+        if (!states[state_id].races[race_id].betters[user_id]) {
             states[state_id].races[race_id].betters[user_id] = 0;
         }
 
