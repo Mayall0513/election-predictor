@@ -39,13 +39,13 @@ export default async (req, res) => {
         }
 
         if (!states[state_id].races[race_id][user_id]) {
-            states[state_id].races[race_id].betters[user_id] = [];
+            states[state_id].races[race_id].betters[user_id] = 0;
         }
 
         const betAmountInt = parseInt(bet_amount);
         states[state_id].total += betAmountInt;
         states[state_id].races[race_id].total += betAmountInt;
-        states[state_id].races[race_id].betters[user_id].push(betAmountInt);
+        states[state_id].races[race_id].betters[user_id] += betAmountInt;
     }
 
     const users = {};
