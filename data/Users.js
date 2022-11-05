@@ -106,14 +106,15 @@ const cacheUserXp = async (userId) => {
 const getSignedInUser = async (req) => {
   if (req.cookies[process.env.AUTH_COOKIE_NAME]) {
     try {
-        const { id, username, avatar, old } = jwt.verify(req.cookies[process.env.AUTH_COOKIE_NAME], process.env.JWT_SECRET);
+        const { id, username, avatar, old, discriminator } = jwt.verify(req.cookies[process.env.AUTH_COOKIE_NAME], process.env.JWT_SECRET);
         const xp = await getUserXp(id, old);
 
         return { 
           id, 
           username, 
           avatar,
-          xp
+          xp,
+          discriminator
         };
     }
     

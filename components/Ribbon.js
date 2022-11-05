@@ -5,6 +5,10 @@ export default function Ribbon(props) {
     const { user } = props;
     const router = useRouter();
     
+    const userAvatarUrl = user && (user.avatar ? 
+        `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}?size=80` :
+        `https://cdn.discordapp.com/embed/avatars/${parseInt(user.discriminator) % 5}.png?size=80`);
+
     return (
         <div className="ribbon-container">
             <div className="ribbon">
@@ -38,7 +42,7 @@ export default function Ribbon(props) {
                                     Sign out
                                 </button>
                             </div>
-                            <img className="avatar" width="64" height="64" src={`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}?size=80`}/>
+                            <img className="avatar" width="64" height="64" src={userAvatarUrl}/>
                         </> :
                         <button 
                             type="button" 

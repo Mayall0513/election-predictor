@@ -44,7 +44,7 @@ export default async (req, res) => {
             }
 
             const userResponse = await axios.get(process.env.DISCORD_API_URI + "/users/@me", userConfig);
-            const { id , username, avatar } = userResponse.data;
+            const { id , username, avatar, discriminator } = userResponse.data;
 
             const revokeParams = new URLSearchParams({
                 token: access_token,
@@ -61,7 +61,8 @@ export default async (req, res) => {
                 { 
                     id, 
                     username, 
-                    avatar, 
+                    avatar,
+                    discriminator,
                     old: timestampDate < accountAgeMinimum 
                 },
                 process.env.JWT_SECRET,
