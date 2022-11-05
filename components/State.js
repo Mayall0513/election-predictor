@@ -74,7 +74,7 @@ export default function State(props) {
                     className={className}
                     fill={`rgb(${r}, ${g}, ${b})`}
                     d={statePaths[stateId]}
-                    onClick={(e) => onClicked({ stateId, raceId: 0, event: e }) }
+                    onMouseUp={(e) => onClicked({ stateId, raceId: 0, event: e }) }
                     onMouseEnter={(e) => mouseEntered({ stateId, raceId: 0, event: e }) }
                 />
             );
