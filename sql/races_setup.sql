@@ -366,10 +366,10 @@ values (0, 0, 'ri', 'Other candidate', 'oth', false);
 -- Massachusetts
 
 insert into races(race_type, race_index, state_id, candidate_name, candidate_party, incumbent)
-values (0, 0, 'ma', 'Maura Healey', 'rep', false);
+values (0, 0, 'ma', 'Maura Healey', 'dem', false);
 
 insert into races(race_type, race_index, state_id, candidate_name, candidate_party, incumbent)
-values (0, 0, 'ma', 'Geoff Diehl', 'dem', false);
+values (0, 0, 'ma', 'Geoff Diehl', 'rep', false);
 
 insert into races(race_type, race_index, state_id, candidate_name, candidate_party, incumbent)
 values (0, 0, 'ma', 'Other candidate', 'oth', false);
