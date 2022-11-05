@@ -34,9 +34,7 @@ export default function Ribbon(props) {
                                 <button 
                                     type="button" 
                                     className="link-button"
-                                    onClick={(e) => {
-                                        router.replace("/api/auth/signout", undefined, { shallow: true });
-                                    }}>
+                                    onClick={(e) => router.replace("/api/auth/signout", undefined, { shallow: true }) }>
                                     Sign out
                                 </button>
                             </div>
@@ -45,9 +43,7 @@ export default function Ribbon(props) {
                         <button 
                             type="button" 
                             className="link-button"
-                            onClick={(e) => {
-                                router.replace("/api/auth/signin", undefined, { shallow: true });
-                            }}>
+                            onClick={(e) => router.replace("/api/auth/signin", undefined, { shallow: true }) }>
                             Sign in
                         </button>
                     }

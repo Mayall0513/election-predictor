@@ -296,11 +296,12 @@ button {
 }
 
 .prediction-section-title {
-  font-size: 18pt;
+  font-size: 14pt;
   color: #e2e2e2;
 }
 
 .prediction-section-state-name {
+  font-size: 18pt;
   color: #f8f8f8;
   font-weight: bolder;
 }

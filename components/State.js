@@ -18,6 +18,11 @@ const lerpr = (first, second, percent) => {
     }
 };
 
+/**
+ * There must be an atleast 1% difference to lerp
+ */
+const minDifferenceToLerp = 1;
+
 export default function State(props) {
     const { races, stateId, focused, onClicked, mouseEntered } = props;
 
@@ -34,7 +39,7 @@ export default function State(props) {
         const race = races[0];
         const { odds, party } = race.candidates[0];
         const className = "state " + (focused ? "state-focused" : "");
-        let candidateLead = null;
+        let candidateLead = 0;
 
         for (let i = 1; i < race.candidates.length; i++) {
             const secondRace = race.candidates[i];
@@ -45,7 +50,7 @@ export default function State(props) {
             }
         }
 
-        if (candidateLead < 0.5) {
+        if (candidateLead < minDifferenceToLerp) {
             return (
                 <path
                     className={className}
@@ -60,7 +65,7 @@ export default function State(props) {
         else {
             const leadingCandidateParty = race.candidates[0].party || 'oth';
             const leadingCandidateColor = partyColours[leadingCandidateParty];
-            const candidateLeadPercent = (candidateLead - 0.5) / 100;
+            const candidateLeadPercent = (candidateLead - minDifferenceToLerp) / 100;
             const lerpPercent = Math.min(candidateLeadPercent * 2, 1);
             const { r, g, b } = lerpr(leadingCandidateColor, defaultStateColor, lerpPercent);           
 

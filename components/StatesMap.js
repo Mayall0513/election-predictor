@@ -64,7 +64,6 @@ export default function StatesMap(props) {
                     {stateDrawBatches}
                 </svg>
             </div>
-  
             { isBrowser && hoveredRace.race != null && hoveredRace.state != null &&
                 <Tooltip
                     race={hoveredRace.race}
