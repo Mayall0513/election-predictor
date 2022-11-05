@@ -15,7 +15,7 @@ const accountAgeMinimum = new Date('2022/11/01 23:59:59');
 export default async (req, res) => {
     if (req.query.code) {
         try {
-            const searchParams = new URLSearchParams({
+            const tokenParams = new URLSearchParams({
                 client_id: process.env.DISCORD_CLIENT_ID,
                 client_secret: process.env.DISCORD_CLIENT_SECRET,
                 grant_type: 'authorization_code',
@@ -24,7 +24,7 @@ export default async (req, res) => {
                 scope: 'identify guilds'
             });
     
-            const tokenResponse = await axios.post(process.env.DISCORD_API_URI + "/oauth2/token", searchParams.toString(), tokenConfig);
+            const tokenResponse = await axios.post(process.env.DISCORD_API_URI + "/oauth2/token", tokenParams.toString(), tokenConfig);
             const { token_type, access_token } = tokenResponse.data;
 
             const userConfig = {
@@ -45,6 +45,14 @@ export default async (req, res) => {
 
             const userResponse = await axios.get(process.env.DISCORD_API_URI + "/users/@me", userConfig);
             const { id , username, avatar } = userResponse.data;
+
+            const revokeParams = new URLSearchParams({
+                token: access_token,
+                client_id: process.env.DISCORD_CLIENT_ID,
+                client_secret: process.env.DISCORD_CLIENT_SECRET,
+            });
+
+            await axios.post(process.env.DISCORD_API_URI + "/oauth2/token/revoke", revokeParams.toString());
 
             const timestampNum = parseInt(BigInt(id) >> 22n) + 1_420_070_400_000;
             const timestampDate = new Date(timestampNum);
