@@ -25,7 +25,7 @@ const getUserXp = async (userId, oldAccount) => {
     }
     
     const userXp = parseInt(userRows.rows.length === 0 ? 
-      await cacheUserXp(userId) : 
+      0 : //await cacheUserXp(userId) : 
       userRows.rows[0].experience);
 
     // 255 xp is level 3
@@ -41,6 +41,7 @@ const getUserXp = async (userId, oldAccount) => {
     ) - xpWagered; //subtract the xp they've already used
 };
 
+/*
 const cacheUserXp = async (userId) => {
     let page = 0;
 
@@ -102,6 +103,7 @@ const cacheUserXp = async (userId) => {
       page++;
     }
 }
+*/
 
 const getSignedInUser = async (req) => {
   if (req.cookies[process.env.AUTH_COOKIE_NAME]) {
@@ -123,6 +125,8 @@ const getSignedInUser = async (req) => {
 
   return null;
 }
+
+getUserXp(0, true);
 
 export {
     getUserXp,

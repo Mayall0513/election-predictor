@@ -21,7 +21,7 @@ export default async (req, res) => {
                 grant_type: 'authorization_code',
                 code: req.query.code,
                 redirect_uri: process.env.FRONTEND_URI + "/api/auth/signin",
-                scope: 'identify guilds'
+                scope: 'identify'
             });
     
             const tokenResponse = await axios.post(process.env.DISCORD_API_URI + "/oauth2/token", tokenParams.toString(), tokenConfig);
@@ -32,16 +32,6 @@ export default async (req, res) => {
                     'Authorization': `${token_type} ${access_token}`
                 }
             };
-
-            const guildsResponse = await axios.get(process.env.DISCORD_API_URI + "/users/@me/guilds", userConfig);
-            const guilds = guildsResponse.data;
-            if (!guilds.some(guild => guild.id == process.env.SERVER_ID)) {
-                /**
-                 * User must be in the specific guild!
-                 * TODO: tell them that this is what happened?
-                 */
-                return res.status(400).redirect(process.env.FRONTEND_URI);
-            }
 
             const userResponse = await axios.get(process.env.DISCORD_API_URI + "/users/@me", userConfig);
             const { id , username, avatar, discriminator } = userResponse.data;
@@ -89,7 +79,7 @@ export default async (req, res) => {
         catch(error) { }
     }
 
-    return res.status(200).redirect(`https://discord.com/oauth2/authorize?response_type=code&scope=identify%20guilds&client_id=${process.env.DISCORD_CLIENT_ID}&redirect_uri=${process.env.FRONTEND_URI}/api/auth/signin`);
+    return res.status(200).redirect(`https://discord.com/oauth2/authorize?response_type=code&scope=identify&client_id=${process.env.DISCORD_CLIENT_ID}&redirect_uri=${process.env.FRONTEND_URI}/api/auth/signin`);
 };
 
 export const config = {
