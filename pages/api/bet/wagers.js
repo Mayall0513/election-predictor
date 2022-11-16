@@ -59,6 +59,7 @@ const winners = {
     175: true, // Todd Young             - IN Senator
     178: true, // Rand Paul              - KY Senator
     181: true, // Katie Britt            - AL Senator
+    185: true, // Raphael Warnock        - GA Senator
     187: true, // Marco Rubio            - FL Senator
     190: true, // Tim Scott              - SC Senator
     193: true, // Ted Budd               - NC Senator
