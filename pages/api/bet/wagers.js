@@ -137,10 +137,6 @@ export default async (req, res) => {
             for (const raceId in raceType.races) {
                 const race = raceType.races[raceId];
                 const oddsMultiplier = 1 / (race.total / raceType.total);
-                
-                if (raceId == 37) {
-                    console.log(stateId + " " + state);
-                }
     
                 for (const betterId in race.betters) {
                     const wager = race.betters[betterId];
@@ -151,7 +147,6 @@ export default async (req, res) => {
     
                     users[betterId] -= wager;
                     if (race.won) {
-                        console.log(race.won + " " + raceId + " " + oddsMultiplier);
                         users[betterId] += wager * oddsMultiplier;
                     }  
                 }
